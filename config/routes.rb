@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :transactions
   resources :news
   devise_for :admins
   devise_for :users
