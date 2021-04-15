@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :transactions
   resources :alerts
   resources :products
   resources :categories
