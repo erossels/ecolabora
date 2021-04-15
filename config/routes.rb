@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   resources :categories
   resources :news
   devise_for :admins
