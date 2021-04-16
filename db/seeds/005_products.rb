@@ -3,15 +3,15 @@ require 'faker'
 r_actions = [0, 1, 2]
 status_num = [0, 1]
 
-20.times do |i|
+10.times do |i|
 
-  5.times do |j|
+  4.times do |j|
     Product.create!(
       name: Faker::Commerce.product_name,
       description: Faker::Lorem.paragraph,
       r_action: r_actions.sample,
       status: status_num.sample,
-      user_id: i + 1,
+      user_id: i + 9,
       category_id: j + 1
     )
   end
