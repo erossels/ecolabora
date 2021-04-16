@@ -60,3 +60,5 @@ gem "image_processing", "~> 1.12"
 gem "aws-sdk-s3", "~> 1.93"
 
 gem "faker", "~> 2.17"
+
+gem "figaro", "~> 1.2"

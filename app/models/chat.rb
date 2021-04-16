@@ -1,4 +1,4 @@
 class Chat < ApplicationRecord
-  belongs_to :transaction
+  belongs_to :sales
   has_many :messages
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :evaluations
   resources :messages
   resources :chats
-  resources :transactions
+  resources :sales
   resources :alerts
   resources :products
   resources :categories
