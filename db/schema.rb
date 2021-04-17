@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_185606) do
+ActiveRecord::Schema.define(version: 2021_04_17_110026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(version: 2021_04_16_185606) do
 
   create_table "evaluations", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "transaction_id", null: false
+    t.bigint "sale_id", null: false
     t.integer "grade"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["transaction_id"], name: "index_evaluations_on_transaction_id"
+    t.index ["sale_id"], name: "index_evaluations_on_sale_id"
     t.index ["user_id"], name: "index_evaluations_on_user_id"
   end
 
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 2021_04_16_185606) do
   add_foreign_key "alerts", "users"
   add_foreign_key "categories", "categories"
   add_foreign_key "chats", "sales", column: "sales_id"
-  add_foreign_key "evaluations", "sales", column: "transaction_id"
+  add_foreign_key "evaluations", "sales"
   add_foreign_key "evaluations", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
