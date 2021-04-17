@@ -1,3 +1,92 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f7fff7!important;
+} 
+
+.titulos {
+  font-family: 'Varela', sans-serif;
+}
+
+.textos {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar_ecolabora, footer {
+  background-color:  #ffe66d!important;
+  background:  #ffe66d!important;
+  color:  #2f3061!important;
+}
+
+.custom-carusel {
+  background-color: #f7fff7!important;
+  background: #f7fff7!important;
+  width: 100%;
+  height: 400px;
+}
+
+.text-carousel {
+  color: #2f3061!important;
+  text-align: center;
+  font-weight: 400;
+  font-size: 65px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.carousel-caption {
+  top: 0;
+  bottom: auto;
+  
+}
+
+.imagenesCarro {
+  width: 90%;
+  height: 400px;
+  align-items: center;
+  margin: auto;
+}
+
+.btn-carousel {
+  width: 20px !important;;
+  height: 400px !important;
+  padding: 0px,0px,0px,0px;
+}
+
+#ecolabora {
+  background-color:  #2f3061!important;
+  background:  #2f3061!important;
+  color: #f7fff7!important;
+}
+
+#news {
+  background-color:  #6ca6c1!important;
+  background:  #6ca6c1!important;
+  color: #f7fff7!important;
+}
+
+.btn-noticias {
+  background-color:  #2f3061!important;
+  background:  #2f3061!important;
+  color: #f7fff7!important;
+}
+
+i {
+  color:  #2f3061!important;
+}
+
+footer {
+  text-align: center;
+}
+
+.news-photo {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+.textos-news{
+  color: #2f3061!important;
+}

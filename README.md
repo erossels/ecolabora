@@ -4,7 +4,7 @@
 Ecolabora busca ser un lugar donde se produzca la revalorización de objetos que de otra manera terminarían en rellenos sanitarios. 
 Ecolabora se define como el tinder de la economía circular. Un lugar donde los usuarios puedan subir sus productos y regalarlos a usuarios cerca de su ubicación.
 
-El modelo de base de datos utilizado puede encontrarse aquí [Aquí](https://dbdiagram.io/d/606b10ccecb54e10c33eba79 "aquí") 
+El modelo de base de datos utilizado puede encontrarse aquí [Aquí](https://dbdiagram.io/d/606b10ccecb54e10c33eba79) 
 
 ## Versiones.
 
@@ -13,6 +13,6 @@ El modelo de base de datos utilizado puede encontrarse aquí [Aquí](https://dbd
 
 ## Gestión del proyecto
 
-Se utiliza trello para gestionar el desarrollo del proyecto. Las historias de usuario y el avance en el desarrollo se pueden obserbvar en [Panel Ecolabora](https://trello.com/b/tGVNQ2K0/ecolabora "Panel Ecolabora")
+Se utiliza trello para gestionar el desarrollo del proyecto. Las historias de usuario y el avance en el desarrollo se pueden observar en [Panel Ecolabora](https://trello.com/b/tGVNQ2K0/ecolabora)
 
 
