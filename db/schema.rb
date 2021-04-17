@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_110026) do
+ActiveRecord::Schema.define(version: 2021_04_17_110935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,10 +65,10 @@ ActiveRecord::Schema.define(version: 2021_04_17_110026) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.bigint "sales_id", null: false
+    t.bigint "sale_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["sales_id"], name: "index_chats_on_sales_id"
+    t.index ["sale_id"], name: "index_chats_on_sale_id"
   end
 
   create_table "evaluations", force: :cascade do |t|
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_110026) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "alerts", "users"
   add_foreign_key "categories", "categories"
-  add_foreign_key "chats", "sales", column: "sales_id"
+  add_foreign_key "chats", "sales"
   add_foreign_key "evaluations", "sales"
   add_foreign_key "evaluations", "users"
   add_foreign_key "messages", "chats"
