@@ -7,18 +7,18 @@
     <ul class="navbar-nav ml-auto textos navbar_ecolabora">
     <% if user_signed_in? %>
         <li class="nav-item">
-          <%=link_to 'My Profile', edit_user_registration_path, class: "dropdown-item"%>
+          <%=link_to 'Mi perfil', edit_user_registration_path, class: "dropdown-item"%>
         </li>
         <li role="separator" class="divider"></li>
         <li class="nav-item">
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+          <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "dropdown-item"%>
         </li>
       <% else  %>
         <li class="nav-item">
-          <%=link_to 'Sign in', new_user_registration_path, class: "dropdown-item" %>
+          <%=link_to 'Regístrate', new_user_registration_path, class: "dropdown-item" %>
         </li>
         <li class='nav-item'>
-          <%=link_to 'Login', user_session_path, class: "dropdown-item" %>
+          <%=link_to 'Inicio sesión', user_session_path, class: "dropdown-item" %>
         </li>
       <% end  %>
     </ul>

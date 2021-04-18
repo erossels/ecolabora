@@ -1,29 +1,76 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class='container-fluid header'>
+  <div class='contaoner col-md-12 mx-auto my-3 center'>
+      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
   </div>
+  <div class='container col-md-4 mx-auto my-3'>
+    <h2 class='titulos'>Regístrate</h2>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="field textos">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Nombre"%><br />
+        <%= f.text_field :first_name %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Apellido"%><br />
+        <%= f.text_field :last_name %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Edad"%><br />
+        <%= f.select :age, ((0..99).map {|i| [i,i] }) %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Dirección"%><br />
+        <%= f.text_field :address %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Nº"%><br />
+        <%= f.text_field :n_address %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Nº de dirección"%><br />
+        <%= f.text_field :n_address %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Comuna"%><br />
+        <%= f.text_field :city %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label "Región"%><br />
+        <%= f.text_field :province %>
+      </div>
+
+      <div class="actions textos">
+        <%= f.submit "Sign up", class:'btn btn-form textos'%>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
