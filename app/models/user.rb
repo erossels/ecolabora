@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :alerts
   has_many :products
-  has_many :transactions
-  has_many :chats, through: :transaction
+  has_many :sales
+  has_many :chats
   has_one_attached :avatar
 
   def to_s
