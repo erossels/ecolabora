@@ -3,4 +3,8 @@ class Category < ApplicationRecord
   has_many :alerts
   has_many :products
   has_many :categories
+
+  def to_s
+    name
+  end
 end

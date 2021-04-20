@@ -14,7 +14,7 @@
       </div>
 
       <div class="field textos">
-        <%= f.label :password %>
+        <%= f.label "Crea tu contraseña" %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
         <% end %><br />
@@ -22,7 +22,7 @@
       </div>
 
       <div class="field textos">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label "Confirma tu contraseá" %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
@@ -47,23 +47,23 @@
       </div>
 
       <div class="field textos">
-        <%= f.label "Nº"%><br />
-        <%= f.text_field :n_address %>
-      </div>
-
-      <div class="field textos">
         <%= f.label "Nº de dirección"%><br />
         <%= f.text_field :n_address %>
       </div>
 
       <div class="field textos">
-        <%= f.label "Comuna"%><br />
-        <%= f.text_field :city %>
+        <%= f.label "Región" %><br />
+        <%= f.select :province, options_from_collection_for_select(@regions, :id, :name), prompt: 'Región..', id: "f-category", class:'textos' %>
       </div>
 
       <div class="field textos">
-        <%= f.label "Región"%><br />
-        <%= f.text_field :province %>
+        <%= f.label "Comuna" %><br />
+        <%= f.select :city, options_from_collection_for_select(@counties, :id, :name), prompt: 'Comuna..', id: "form-category",class:'textos' %>
+      </div>
+
+      <div class="field textos">
+        <%= f.label :avatar %><br />
+        <%= f.file_field :avatar %>
       </div>
 
       <div class="actions textos">

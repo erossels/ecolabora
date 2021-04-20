@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :transactions
   has_many :chats, through: :transaction
   has_one_attached :avatar
+
+  def to_s
+    first_name
+  end
 end

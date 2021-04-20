@@ -64,3 +64,7 @@ gem "faker", "~> 2.17"
 gem "figaro", "~> 1.2"
 
 gem "font-awesome-rails", "~> 4.7"
+
+gem "activeadmin", "~> 2.9"
+
+gem "cancancan", "~> 3.2"
