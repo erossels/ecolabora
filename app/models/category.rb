@@ -4,6 +4,8 @@ class Category < ApplicationRecord
   has_many :products
   has_many :categories
 
+  validates :name, presence: { message: "La categoría debe llevar un nombre" }
+
   def to_s
     name
   end

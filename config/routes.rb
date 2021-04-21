@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root 'home#index'
 
+  get "/mi_perfil", to: "home#profile"  , as: "user_profile"
+
   resources :evaluations
   resources :messages
   resources :chats

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :sales
   has_many :chats
   has_one_attached :avatar
+  
 
   def to_s
     first_name

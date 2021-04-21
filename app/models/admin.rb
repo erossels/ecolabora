@@ -4,4 +4,6 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :news
+  validates :email, :uniqueness => { :case_sensitive => false }
+
 end
