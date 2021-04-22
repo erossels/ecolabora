@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :sales
   has_many :chats
   has_one_attached :avatar
+  has_many :evaluations, through: :purchases
   
 
   def to_s

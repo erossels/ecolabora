@@ -22,7 +22,7 @@
       </div>
 
       <div class="field textos">
-        <%= f.label "Confirma tu contraseá" %><br />
+        <%= f.label "Confirma tu contraseña" %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
@@ -63,7 +63,7 @@
 
       <div class="field textos">
         <%= f.label :avatar %><br />
-        <%= f.file_field :avatar %>
+        <%= f.file_field :avatar, placeholder: 'Sube una foto para tu perfil' %>
       </div>
 
       <div class="actions textos">

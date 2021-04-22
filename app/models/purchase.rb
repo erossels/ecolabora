@@ -3,8 +3,11 @@ class Purchase < ApplicationRecord
   has_one :product
   has_one :user, through: :product
   has_one :chat
-  has_one :evaluation
+  has_many :evaluations
 
+  scope :pending, -> { where('status = 1') }
+  scope :done, -> { where('status = 2') }
+  
   enum status: [ :creada, :cancelada, :hecha ] 
 
 end

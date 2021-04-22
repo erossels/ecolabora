@@ -9,11 +9,11 @@ class HomeController < ApplicationController
   end
 
   def profile
-    @user = current_user
+    @user = User.find(current_user.id)
     @products = Product.where(user_id: @user.id)
-    @sold_products = Product.where(status: 1, user_id: @user.id)
     @purchases = Purchase.where(user_id: @user.id)
-    @evaluations = Evaluation.where(purchase_id: @purchases.product.user.id)
+    @sales = Purchase.where(product_id: @products.ids)
+    @evaluations = Evaluation.where(purchase_id: @purchases.ids)
   end
 
 end
