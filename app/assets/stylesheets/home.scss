@@ -95,3 +95,19 @@ footer {
   width: 500px;
   height: 500px;
 }
+
+.profile-head {
+  transform: translateY(5rem)
+}
+
+.cover {
+  background-color: #2f3061;
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+.profile-body {
+  background: #6ca6c1;
+  background: linear-gradient(to right, #6ca6c1, #f7fff7);
+  min-height: 100vh
+}
