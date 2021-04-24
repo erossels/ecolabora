@@ -12,9 +12,10 @@ require("channels")
 require("jquery")
 require("popper.js")
 require("stylesheets/application.scss")
+require("packs/profile.js")
+require("packs/show.js")
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
-
 
 
 

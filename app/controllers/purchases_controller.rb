@@ -11,25 +11,26 @@ class PurchasesController < ApplicationController
   def show
   end
 
-  # GET /Purchases/new
-  def new
-    @purchase = Purchase.new
-  end
-
   # GET /Purchases/1/edit
   def edit
   end
 
   # POST /Purchases or /Purchases.json
   def create
-    @purchase = Purchase.new(Purchase_params)
-
+    @purchase = Purchase.new
+    @purchase.status = 0
+    @purchase.user_id = current_user.id
+    @purchase.product_id = params[:product_id]
+    
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: "purchase was successfully created." }
+        @product = Product.find(params[:product_id])
+        @product.status = 1
+        @product.save
+        format.html { redirect_to @purchase, notice: "Este producto es tuyo. Contáctate con el dueño a través del un mensaje. Sigamos revalorizando <3" }
         format.json { render :show, status: :created, location: @purchase }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to root_path, alert: "¡Ups! Algo salió mal"}
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
@@ -50,9 +51,12 @@ class PurchasesController < ApplicationController
 
   # DELETE /purchases/1 or /purchases/1.json
   def destroy
+    product = Product.find(@purchase.product_id)
+    product.status = 0
+    product.save
     @purchase.destroy
     respond_to do |format|
-      format.html { redirect_to purchases_url, notice: "purchase was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "No hay problema. Ya encontrarás algo" }
       format.json { head :no_content }
     end
   end

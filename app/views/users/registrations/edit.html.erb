@@ -5,7 +5,7 @@
   <div class='container col-md-10 mx-auto my-3'>
     <h2 class='titulos'>Edita tu perfil</h2>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, remote: true) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
 
       <div class='row'>
@@ -70,12 +70,12 @@
 
           <div class="field textos">
             <%= f.label "Región" %><br />
-            <%= f.select :province, options_from_collection_for_select(@regions, :id, :name), prompt: 'Región..', id: "f-category", class:'textos' %>
+            <%= f.select :province, options_from_collection_for_select(@regions, :name, :name, current_user.province), prompt: 'Región..', id: "f-category", class:'textos'  %>
           </div>
 
           <div class="field textos">
             <%= f.label "Comuna" %><br />
-            <%= f.select :city, options_from_collection_for_select(@counties, :id, :name), prompt: 'Comuna..', id: "form-category",class:'textos' %>
+            <%= f.select :city, options_from_collection_for_select(@counties, :name, :name, current_user.city), prompt: 'Comuna..', id: "form-category",class:'textos'  %>
           </div>
 
           <div class="field textos">

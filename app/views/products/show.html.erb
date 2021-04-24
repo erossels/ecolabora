@@ -1,29 +1,80 @@
-<p id="notice"><%= notice %></p>
+<div class='container header'>
+  <div class='contaoner col-md-12 mx-auto my-3 center'>
+      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+  </div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @product.category_id %>
-</p>
+  <div class='row col-md-10 mb-3 align-items-center justify-content-center p-4 rounded shadow-sm bg-light'>
+      <div class='container col-md-8'>
+        <%= image_tag(@product.photos.first, alt:"Foto_de_producto", width:"500", class:"rounded mb-2 img-thumbnail")%>
+      </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @product.user_id %>
-</p>
+      <div class='container col-md-4'>
+        <h5 class='textos'>
+          <strong>Categoría:</strong>
+          <%= @product.category %>
+        </h5>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+        <h5 class='textos'>
+          <strong>Usuario:</strong>
+          <%= @product.user %>
+        </h5>
 
-<p>
-  <strong>Action:</strong>
-  <%= @product.action %>
-</p>
+        <h5 class='textos'>
+          <strong>¿Que és?:</strong>
+          <%= @product.name %>
+        </h5>
 
-<p>
-  <strong>Status:</strong>
-  <%= @product.status %>
-</p>
+        <h5 class='textos'>
+          <strong>Descripción:</strong>
+          <%= @product.description %>
+        </h5>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+        <h5 class='textos'>
+          <strong>R de:</strong>
+          <%= @product.r_action %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>Status:</strong>
+          <%= @product.status %>
+        </h5>
+      </div>
+
+      <button type="button" class="btn btn-link textos text-muted btn-modal" data-bs-toggle="modal" data-bs-target="#PhotosModal">Mostrar más fotos</button>
+
+  </div>
+  <div class='row align-items-center justify-content-center mb-4'>
+    <%if @product.user_id == current_user.id %>
+      <%= link_to 'Editar', edit_product_path(@product), class:'btn btn-form textos d-block col-md-2' %> |
+      <%= link_to 'Volver al Home', root_path, class:'btn btn-link textos d-block col-md-2' %>
+    <% else  %>
+      <%= link_to '¡Lo quiero!', new_purchase_path(@product), class:'btn btn-form textos d-block col-md-2',data: { confirm: '¿Estás seguro?' } %> |
+      <%= link_to 'Volver al Home', root_path, class:'btn btn-link textos d-block col-md-2' %>
+    <% end  %>
+  </div>
+
+    <!-- Modal -->
+  <div class="modal fade" id="PhotosModal" tabindex="-1" aria-labelledby="PhotosModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="PhotosModalLabel"><% @product.name  %></h5>
+          </div>
+          <div class="modal-body">
+              <% if !@product.photos.attached?  %>
+                  <p class="font-italic mb-0 center">No hay fotos</p>
+              <% else  %> 
+                  <% @product.photos.each do |photo| %> 
+                    <%= image_tag(photo, alt:"Foto_de_producto", class:"rounded mx-auto d-block", style:"height: 300px; width: 300px")%>
+                  <% end  %>
+              <% end  %>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">Close</button>
+          </div>
+          </div>
+      </div>
+  </div>
+
+
+</div>

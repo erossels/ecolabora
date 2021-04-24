@@ -1,19 +1,59 @@
-<p id="notice"><%= notice %></p>
+<div class='container header'>
+  <div class='contaoner col-md-12 mx-auto my-3 center'>
+      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+  </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @purchase.user_id %>
-</p>
+  <div class='mx-auto mb-3 align-items-center justify-content-center p-4'>
+    <h5> Has revalorizado el siguiente producto </h5>
+  </div>
 
-<p>
-  <strong>Product:</strong>
-  <%= @purchase.product_id %>
-</p>
+  <% product = Product.find(@purchase.product_id)  %>
 
-<p>
-  <strong>Status:</strong>
-  <%= @purchase.status %>
-</p>
+  <div class='row col-md-10 mb-3 align-items-center justify-content-center p-4 rounded shadow-sm bg-light'>
+      <div class='container col-md-8'>
+        <%= image_tag(product.photos.first, alt:"Foto_de_producto", width:"500", class:"rounded mb-2 img-thumbnail")%>
+      </div>
 
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+      <div class='container col-md-4'>
+        <h5 class='textos'>
+          <strong>Categoría:</strong>
+          <%= product.category %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>Usuario:</strong>
+          <%= product.user %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>¿Que és?:</strong>
+          <%= product.name %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>Descripción:</strong>
+          <%= product.description %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>R de:</strong>
+          <%= product.r_action %>
+        </h5>
+
+        <h5 class='textos'>
+          <strong>Status:</strong>
+          <%= product.status %>
+        </h5>
+
+        <%= link_to 'Contáctalo', new_chat_path, class:'btn btn-success textos d-block mx-auto col-5'  %>
+
+      </div>
+
+  </div>
+  <div class='row align-items-center justify-content-center mb-4'>
+      <%= link_to 'Mi perfil', user_profile_path, class:'btn btn-form textos d-block col-md-2' %> |
+      <%= link_to 'No lo quiero', @purchase, method: :delete, data: { confirm: '¿Seguro? Esta bien, alguien quizás lo necesite más' }, class:'btn btn-danger textos d-block col-md-2'  %>
+      <%= link_to 'Volver', root_path, class:'btn btn-link d-block col-md-2' %>
+  </div>
+
+</div>

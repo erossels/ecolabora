@@ -4,26 +4,33 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.with_attached_photos.all
+    @products = @products.order(created_at: :desc)
+    @categories = Category.all
   end
 
   # GET /products/1 or /products/1.json
   def show
+    @categories = Category.all
   end
 
   # GET /products/new
   def new
     @product = Product.new
+    @categories = Category.all
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
-
+    @categories = Category.all
+    @product.user_id = current_user.id
+    @product.status = 0
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -37,6 +44,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    @categories = Category.all
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: "Product was successfully updated." }
@@ -65,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:category_id, :user_id, :description, :r_action, :status, photos: [])
+      params.require(:product).permit(:category_id, :user_id, :name, :description, :r_action, :status, photos: [])
     end
 end

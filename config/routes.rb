@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "/mi_perfil", to: "home#profile"  , as: "user_profile"
-
+  get "/purchase/:product_id", to: "purchases#create", as: "new_purchase"
+  resources :purchases
   resources :evaluations
   resources :messages
   resources :chats
-  resources :sales
   resources :alerts
   resources :products
   resources :categories

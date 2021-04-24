@@ -11,37 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+  <div class="field textos">
+    <%= form.label :category_id, "Categoría" %><br>
+    <%= form.select :category_id, options_from_collection_for_select(@categories, :id, :name, product.category_id), prompt: 'Selecciona una categoría...', id: "form-category",class:'textos' %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field textos">
+    <%= form.label :name, "¿Que quieres revalorizar?"  %><br>
+    <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
+  <div class="field textos">
+    <%= form.label :description, "Describe tu producto"  %><br>
     <%= form.text_area :description %>
   </div>
 
-  <div class="field">
-    <%= form.label :action %>
-    <%= form.text_field :action %>
+  <div class="field textos">
+    <%= form.label :r_action, "¿Cuál es tu R?"%><br>
+    <%= form.select :r_action, ["Reducir", "Reutilizar", "Reciclar"] %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
+  <div class='field textos'>
+    <%= form.label :photos, "Fotos del producto" %><br>
+    <%= form.file_field :photos, multiple: true %>
   </div>
 
-  <div class='field'>
-    <%= form.label :Fotos %>
-    <%= form.file :photos, multiple: true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions textos">
+    <%= form.submit "Crear", class:'btn btn-form textos my-2'%>
   </div>
 <% end %>

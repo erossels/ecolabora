@@ -57,8 +57,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    products_path(resource)
+  # def after_sign_up_path_for(resource)
+  #   products_path(resource)
+  # end
+
+  def after_update_path_for(resource)
+    flash[:notice] = "Tus datos se han actualizado con éxito"
+    user_profile_path
   end
 
   # The path used after sign up for inactive accounts.
