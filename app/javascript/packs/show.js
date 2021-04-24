@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $('.btn-modal').on('click', function(){
     $('#PhotosModal').modal('show') 
   })  
@@ -6,5 +6,6 @@ $(document).ready(function() {
   $('.btn-close-modal').on('click',function(){
     $('.modal').modal('hide')
   })
+
 });
 

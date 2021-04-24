@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 
   def profile
     @user = User.find(current_user.id)
-    @products = @user.products
+    @products = Product.where(user_id: @user.id)
     @products = @products.order(created_at: :desc)
     @purchases = Purchase.where(user_id: @user.id)
     @sales = Purchase.where(product_id: @products.ids)

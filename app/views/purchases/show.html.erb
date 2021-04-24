@@ -11,7 +11,9 @@
 
   <div class='row col-md-10 mb-3 align-items-center justify-content-center p-4 rounded shadow-sm bg-light'>
       <div class='container col-md-8'>
-        <%= image_tag(product.photos.first, alt:"Foto_de_producto", width:"500", class:"rounded mb-2 img-thumbnail")%>
+        <% if product.photos.present?   %>
+          <%= image_tag(product.photos.first, alt:"Foto_de_producto", width:"500", class:"rounded mb-2 img-thumbnail")%>
+        <% end %>
       </div>
 
       <div class='container col-md-4'>
@@ -46,6 +48,16 @@
         </h5>
 
         <%= link_to 'Contáctalo', new_chat_path, class:'btn btn-success textos d-block mx-auto col-5'  %>
+
+        <div class='container textos'>
+          <h5 class='titulos mx-auto my-2 d-block mx-auto col-6'>Evalúa</h5>
+            <div id='container-eval1'>
+              ¿Era lo que esperabas?: <%= rating_for @purchase, 'product' %>
+            </div>
+            <div id='container-eval2'>
+              ¿Recomiendas al usuario?: <%= rating_for @purchase, 'user' %>
+            </div>
+        </div>
 
       </div>
 

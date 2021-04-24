@@ -9,4 +9,6 @@ class Purchase < ApplicationRecord
   
   enum status: [ :creada, :cancelada, :hecha ] 
 
+  ratyrate_rateable "product", "user"
+
 end

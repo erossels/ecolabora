@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $('.btn-modal').on('click', function(){
     $('#ProductModal').modal('show') 
   })  

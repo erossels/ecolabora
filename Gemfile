@@ -68,3 +68,5 @@ gem "font-awesome-rails", "~> 4.7"
 gem "activeadmin", "~> 2.9"
 
 gem "cancancan", "~> 3.2"
+
+gem "ratyrate", "~> 1.2.alpha"

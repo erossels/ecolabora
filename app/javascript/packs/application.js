@@ -14,6 +14,9 @@ require("popper.js")
 require("stylesheets/application.scss")
 require("packs/profile.js")
 require("packs/show.js")
+require("packs/jquery.raty")
+require("packs/ratyrate")
+
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
 

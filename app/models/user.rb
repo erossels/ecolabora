@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_one_attached :avatar
   has_many :evaluations, through: :purchases, dependent: :destroy
+  ratyrate_rater
 
   def to_s
     first_name
