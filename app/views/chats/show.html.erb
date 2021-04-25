@@ -1,9 +1,143 @@
-<p id="notice"><%= notice %></p>
+<div class='container-fluid header'>
 
-<p>
-  <strong>Transaction:</strong>
-  <%= @chat.transaction_id %>
-</p>
+  <div class='container col-md-8 mx-auto my-3'>
+      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+  </div>
 
-<%= link_to 'Edit', edit_chat_path(@chat) %> |
-<%= link_to 'Back', chats_path %>
+  <div class='container mx-auto my-3 d-block col-3'>
+    <h2 class='titulos'>Ponte en contacto</h2>
+  </div>
+
+  <% product = Product.find(@purchase.product_id)  %>
+
+  <div class='container row mx-auto textos'>
+    <div class='container col-md-4'>
+      <div class='row mx-auto align-items-center justify-content-center p-2 rounded shadow-sm bg-light max-size-box'>
+          <div class='container col-md-8'>
+            <% if product.photos.present?   %>
+              <%= image_tag(product.photos.first, alt:"Foto_de_producto", width:"200", class:"rounded mb-2 img-thumbnail")%>
+            <% end %>
+          </div>
+
+          <div class='container col-md-4'>
+            <p class='textos'>
+              <strong>Categoría:</strong>
+              <%= product.category %>
+            </p>
+
+            <p class='textos'>
+              <strong>Usuario:</strong>
+              <%= product.user %>
+            </p>
+
+            <p class='textos'>
+              <strong>¿Que és?:</strong>
+              <%= product.name %>
+            </p>
+
+            <p class='textos'>
+              <strong>Descripción:</strong>
+              <%= product.description %>
+            </p>
+          </div>
+      </div>
+
+      <div class='center mx-auto my-3'>
+        <%= link_to 'Mi perfil', user_profile_path, class:'btn btn-form textos col-6  d-block mx-auto my-1' %>
+        <%= link_to 'No lo quiero', @purchase, method: :delete, data: { confirm: '¿Seguro? Esta bien, alguien quizás lo necesite más' }, class:'btn btn-danger textos col-6   d-block mx-auto my-1'  %>
+        <%= link_to 'Volver', @purchase, class:'btn btn-link textos col-6   d-block mx-auto my-1' %>
+      </div>
+    </div>
+
+    <div class='container col-md-8 mb-4 px-3'>
+      <div class="card-chat mx-3 textos">
+              <div class="card-chat-header msg_head">
+                <div class="d-flex bd-highlight">
+                  <div class="img_cont">
+                    <%= image_tag(current_user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img mx-1 mt-2")%>
+                    <span class="online_icon"></span>
+                  </div>
+                  <div class="user_info">
+                    <span><%= product.user %></span>
+                  </div>
+                </div>
+                <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                <div class="action_menu">
+                  <ul>
+                    <li><i class="fas fa-user-circle"></i> View profile</li>
+                    <li><i class="fas fa-users"></i> Add to close friends</li>
+                    <li><i class="fas fa-plus"></i> Add to group</li>
+                    <li><i class="fas fa-ban"></i> Block</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-chat-body msg_card_body">
+                <div class="d-flex justify-content-start mb-4">
+                  <div class="msg_container_custom">
+                    Hi, how are you samim?
+                    <span class="msg_time">8:40 AM, Today</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_container_send">
+                    Hi Khalid i am good tnx how about you?
+                    <span class="msg_time_send">8:55 AM, Today</span>
+                  </div>
+                  <div class="img_cont_msg mr-2">
+                    <%= image_tag(product.user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img_msg")%>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start mb-4">
+                  <div class="msg_container_custom">
+                    I am good too, thank you for your chat template
+                    <span class="msg_time">9:00 AM, Today</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_container_send">
+                    You are welcome
+                    <span class="msg_time_send">9:05 AM, Today</span>
+                  </div>
+                  <div class="img_cont_msg mr-2">
+                    <%= image_tag(product.user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img_msg")%>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start mb-4">
+                  <div class="msg_container_custom">
+                    I am looking for your next templates
+                    <span class="msg_time">9:07 AM, Today</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_container_send">
+                    Ok, thank you have a good day
+                    <span class="msg_time_send">9:10 AM, Today</span>
+                  </div>
+                  <div class="img_cont_msg mr-2">
+                    <%= image_tag(product.user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img_msg")%>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start mb-4">
+                  <div class="msg_container_custom">
+                    Bye, see you
+                    <span class="msg_time">9:12 AM, Today</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-chat-footer mx-auto d-block">
+                <div class="input-group color-input">
+                  <div class="input-group-append">
+                    <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                  </div>
+                  <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                  <div class="input-group-append">
+                    <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>

@@ -9,6 +9,8 @@ class ChatsController < ApplicationController
 
   # GET /chats/1 or /chats/1.json
   def show
+    @purchase = Purchase.find(@chat.purchase_id)
+    @product = @purchase.product_id
   end
 
   # GET /chats/new

@@ -9,6 +9,7 @@ class PurchasesController < ApplicationController
 
   # GET /Purchases/1 or /Purchases/1.json
   def show
+    @chat = Chat.find_by(purchase_id: @purchase.id)
   end
 
   # GET /Purchases/1/edit
@@ -27,6 +28,9 @@ class PurchasesController < ApplicationController
         @product = Product.find(params[:product_id])
         @product.status = 1
         @product.save
+
+        @chat = Chat.create(purchase_id: @purchase.id)
+
         format.html { redirect_to @purchase, notice: "Este producto es tuyo. Contáctate con el dueño a través del un mensaje. Sigamos revalorizando <3" }
         format.json { render :show, status: :created, location: @purchase }
       else
@@ -54,6 +58,10 @@ class PurchasesController < ApplicationController
     product = Product.find(@purchase.product_id)
     product.status = 0
     product.save
+
+    @chat = Chat.find_by(purchase_id: @purchase.id)
+    @chat.destroy
+
     @purchase.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: "No hay problema. Ya encontrarás algo" }
