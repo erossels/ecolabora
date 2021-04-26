@@ -11,8 +11,8 @@ status_num = [0, 1]
       description: Faker::Lorem.paragraph,
       r_action: r_actions.sample,
       status: status_num.sample,
-      user_id: i + 9,
-      category_id: j + 1
+      user_id: i + 1,
+      category_id: j
     )
   end
 
