@@ -1,8 +1,7 @@
 <%= form_with(model: message, local: true) do |form| %>
   <% if message.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
+      <h2><%= pluralize(message.errors.count, "error") %> no permitieron que este mensaje fuera enviado</h2>
       <ul>
         <% message.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,23 +9,17 @@
       </ul>
     </div>
   <% end %>
+  
+  <%= form.hidden_field :user_id, :value => params[:user_id] = current_user.id %>
+  <%= form.hidden_field :chat_id, :value => params[:chat_id] = @chat.id%>
 
-  <div class="field">
-    <%= form.label :chat_id %>
-    <%= form.text_field :chat_id %>
+  <div class="input-group color-input">
+    <%= form.text_area :content, placeholder:"Type your message...", class:"form-control type_msg" %>
+    <div class="input-group-append">
+      <button type="submit" class="btn input-group-text send_btn">
+        <i class="fas fa-paper-plane iconos "></i>
+      </button>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

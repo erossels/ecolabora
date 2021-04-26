@@ -11,6 +11,8 @@ class ChatsController < ApplicationController
   def show
     @purchase = Purchase.find(@chat.purchase_id)
     @product = @purchase.product_id
+    @messages = Message.where(chat_id: @chat.id)
+    @new_message = Message.new
   end
 
   # GET /chats/new
