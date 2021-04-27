@@ -26,10 +26,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     if current_user.provider == "facebook"
-      params.delete("current_password")
-      resource.update_without_password(params)
+      account_update_params.delete("current_password")
+      current_user.update_without_password(account_update_params)
     else
-      resource.update_with_password(params)
+      current_user.update_with_password(account_update_params)
     end
 
     @counties = County.all
