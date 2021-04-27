@@ -25,6 +25,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    if current_user.provider == "facebook"
+      params.delete("current_password")
+      resource.update_without_password(params)
+    else
+      resource.update_with_password(params)
+    end
+
     @counties = County.all
     @regions = Region.all
     super
@@ -56,18 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :age, :address, :n_address, :city, :province, :avatar])
   end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   products_path(resource)
-  # end
-
   def after_update_path_for(resource)
     flash[:notice] = "Tus datos se han actualizado con éxito"
     user_profile_path
   end
 
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
 end

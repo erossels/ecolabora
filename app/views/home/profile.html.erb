@@ -4,7 +4,13 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><%= image_tag @user.avatar, alt:"Foto_de_perfil", width:"130", class:"rounded mb-2 img-thumbnail"%><%= link_to "Editar perfil", edit_user_registration_path(current_user), class: "btn btn-outline-dark btn-sm btn-block" %></div>
+                    
+                    <div class="profile mr-3">
+                        <% if @user.avatar.present?  %>
+                            <%= image_tag @user.avatar, alt:"Foto_de_perfil", width:"130", class:"rounded mb-2 img-thumbnail"%>
+                        <% end  %>
+                        <%= link_to "Editar perfil", edit_user_registration_path(current_user), class: "btn btn-outline-dark btn-sm btn-block" %>
+                    </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0"><%= @user.first_name %> <%= @user.last_name %></h4>
                         <p class="small mb-4"><i class="fas fa-map-marker-alt header"></i><%=@user.city%>, <%= @user.province %></p>

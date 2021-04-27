@@ -3,6 +3,6 @@ require 'faker'
   News.create!(
     title: Faker::Lorem.sentence,
     content: Faker::Lorem.paragraphs(number: 2, supplemental: true),
-    admin_id: 1
+    admin_id: 0
   )
 end

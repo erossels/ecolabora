@@ -53,7 +53,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "devise", "~> 4.7"
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 
 gem "image_processing", "~> 1.12"
 
@@ -70,3 +70,7 @@ gem "activeadmin", "~> 2.9"
 gem "cancancan", "~> 3.2"
 
 gem "ratyrate", "~> 1.2.alpha"
+
+gem "omniauth-facebook", "~> 8.0"
+
+gem "omniauth", "~> 1.9.1"
