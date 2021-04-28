@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_purchase, only: %i[ show edit update destroy ]
+  before_action :set_purchase, only: %i[ show edit update destroy cancel_purchase end_purchase ]
   before_action :authenticate_user!
 
   # GET /Purchases or /Purchases.json
@@ -66,6 +66,35 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, notice: "No hay problema. Ya encontrarás algo" }
       format.json { head :no_content }
+    end
+  end
+
+  def cancel_purchase
+    @purchase.status = 1
+    product = Product.find(@purchase.product_id)
+    product.status = 0
+    product.save
+    respond_to do |format|
+      if @purchase.save
+        format.html { redirect_to @purchase, alert: "La entrega fue cancelada por el dueño del producto" }
+        format.json { render :show, status: :ok, location: @purchase }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def end_purchase
+    @purchase.status = 2
+    respond_to do |format|
+      if @purchase.save
+        format.html { redirect_to @purchase, notice: "Han revalorizado un producto.¡Felicitaciones!" }
+        format.json { render :show, status: :ok, location: @purchase }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+      end
     end
   end
 

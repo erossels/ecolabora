@@ -13,6 +13,8 @@
  @import "app/assets/stylesheets/application.scss";
  @import "app/assets/stylesheets/home.scss";
  @import "font-awesome";
+ @import "bootstrap";
+ @import "summernote-bs4";
  *= require_tree .
  *= require_self
  */

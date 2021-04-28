@@ -7,7 +7,7 @@ class Purchase < ApplicationRecord
   scope :pending, -> { where('status = 0') }
   scope :done, -> { where('status = 2') }
   
-  enum status: [ :creada, :cancelada, :hecha ] 
+  enum status: [ :pendiente, :cancelada, :hecha ] 
 
   ratyrate_rateable "product", "user"
 

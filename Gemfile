@@ -74,3 +74,7 @@ gem "ratyrate", "~> 1.2.alpha"
 gem "omniauth-facebook", "~> 8.0"
 
 gem "omniauth", "~> 1.9.1"
+
+gem 'simple_form'
+
+gem 'summernote-rails'

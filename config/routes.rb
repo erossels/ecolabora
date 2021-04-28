@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "/mi_perfil", to: "home#profile"  , as: "user_profile"
   get "/purchase/:product_id", to: "purchases#create", as: "new_purchase"
+  get "/end_purchase/:id", to: "purchases#end_purchase", as: "end_purchase"
+  get "/cancel_purchase/:id", to: "purchases#cancel_purchase", as: "cancel_purchase"
   resources :purchases
   resources :evaluations
   resources :messages

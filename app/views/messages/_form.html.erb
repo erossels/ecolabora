@@ -14,7 +14,7 @@
   <%= form.hidden_field :chat_id, :value => params[:chat_id] = @chat.id%>
 
   <div class="input-group color-input">
-    <%= form.text_area :content, placeholder:"Type your message...", class:"form-control type_msg" %>
+    <%= form.text_area :content, placeholder:"Type your message...", class:"form-control type_msg", 'data-provider': :summernote %>
     <div class="input-group-append">
       <button type="submit" class="btn input-group-text send_btn">
         <i class="fas fa-paper-plane iconos "></i>
