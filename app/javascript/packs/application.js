@@ -16,11 +16,11 @@ require("packs/profile.js")
 require("packs/show.js")
 require("packs/jquery.raty")
 require("packs/ratyrate")
-require("summernote/summernote-bs4.min")
+require("packs/summernote.js")
+require("packs/summernote-init.js")
 
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
-
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

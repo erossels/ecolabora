@@ -116,6 +116,7 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    curb (0.9.11)
     erubi (1.10.0)
     faker (2.17.0)
       i18n (>= 1.6, < 2)
@@ -180,6 +181,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mailgun-rails (0.1.1)
+      actionmailer
+      activesupport
+      curb
     marcel (1.0.1)
     method_source (1.0.0)
     mini_magick (4.11.0)
@@ -289,7 +294,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    summernote-rails (0.8.12.0)
+    summernote-rails (0.6.16.0)
       railties (>= 3.1)
     thor (1.1.0)
     thread_safe (0.3.6)
@@ -338,6 +343,7 @@ DEPENDENCIES
   image_processing (~> 1.12)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mailgun-rails (~> 0.1.1)
   omniauth (~> 1.9.1)
   omniauth-facebook (~> 8.0)
   pg (>= 0.18, < 2.0)

@@ -78,3 +78,5 @@ gem "omniauth", "~> 1.9.1"
 gem 'simple_form'
 
 gem 'summernote-rails'
+
+gem "mailgun-rails", "~> 0.1.1"

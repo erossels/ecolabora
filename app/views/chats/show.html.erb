@@ -74,17 +74,17 @@
                     <% if message.user_id == @purchase.user_id  %>
                       <div class="d-flex justify-content-start mb-4">
                         <div class="msg_container_custom">
-                          <%= message.content%>
+                          <%= raw message.content%>
                           <span class="msg_time textos"><%= time_ago_in_words(message.created_at) %></span>
                         </div>
                       </div>
                     <% elsif message.user_id == product.user_id %>
                       <div class="d-flex justify-content-end mb-4">
-                        <div class="msg_container_send">
-                          <%= message.content%>
+                        <div class="msg_container_send m-1 p-1">
+                          <%= raw message.content%>
                           <span class="msg_time_send"><%= time_ago_in_words(message.created_at) %></span>
                         </div>
-                        <div class="img_cont_msg mr-2">
+                        <div class="img_cont_msg">
                           <%= image_tag(product.user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img_msg")%>
                         </div>
                       </div>
