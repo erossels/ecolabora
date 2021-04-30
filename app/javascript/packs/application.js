@@ -15,12 +15,16 @@ require("stylesheets/application.scss")
 require("packs/profile.js")
 require("packs/show.js")
 require("packs/jquery.raty")
+require("chartkick")
+require("chart.js")
 require("packs/ratyrate")
 require("packs/summernote.js")
 require("packs/summernote-init.js")
 
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
+import "chartkick"
+import "chartkick/highcharts"
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

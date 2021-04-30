@@ -80,3 +80,7 @@ gem 'simple_form'
 gem 'summernote-rails'
 
 gem "mailgun-rails", "~> 0.1.1"
+
+gem "chartkick", "~> 4.0"
+
+gem "groupdate", "~> 5.2"

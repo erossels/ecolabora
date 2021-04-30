@@ -16,6 +16,8 @@ class HomeController < ApplicationController
     @all_purchases = Purchase.all
     @sales = Purchase.where(product_id: @products.ids)
     @evaluations = Evaluation.where(purchase_id: @purchases.ids)
+    @products_group_by_day = Product.where(user_id: @user.id).group(:created_at).count
+    @products_group_by_category = Product.where(user_id: @user.id).joins(:category).group("categories.name").count
   end
 
 end

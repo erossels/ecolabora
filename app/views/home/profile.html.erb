@@ -21,25 +21,27 @@
             <div class="bg-light p-4 d-flex justify-content-end text-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= @products.count %></h5><small class="text-muted"> <i class="fas fa-image mr-2"></i>Productos ofrecidos</small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @products.count %></h5><small class="text-muted"> <i class="fab fa-product-hunt mr-2"></i>Productos ofrecidos</small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= @products.sold.count %></h5><small class="text-muted"> <i class="fas fa-user mr-2"></i>Productos entregados</small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @products.sold.count %></h5><small class="text-muted"> <i class="fas fa-handshake mr-2"></i>Productos entregados</small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= @sales.count %></h5><small class="text-muted"> <i class="fas fa-user mr-2"></i>Productos recibidos </small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @sales.count %></h5><small class="text-muted"> <i class="fas fa-handshake mr-2"></i>Productos recibidos </small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= (@evaluations.average(:grade)).nil? ? 0 : "" %></h5><small class="text-muted"> <i class="fas fa-user mr-2"></i>Calificación promedio</small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= (@evaluations.average(:grade)).nil? ? 0 : "" %></h5><small class="text-muted"> <i class="fas fa-star mr-2"></i>Calificación promedio</small>
                     </li>
                 </ul>
+
             </div>
 
             <div class="py-4 px-4">
-                <hr>
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Mis productos</h5>
+                    <h5 class="mb-0 mr-auto">Mis productos</h5>
                     <button type="button" class="btn btn-link textos text-muted btn-modal" data-bs-toggle="modal" data-bs-target="#ProductModal">Ver todos mis productos</button>
+                    <button type="button" class="btn btn-link textos text-muted btn-modalKPI" data-bs-toggle="modal" data-bs-target="#KPIModal">Ver mis estadísticas</button>
+            
                 </div>
 
                     <% if @products.first(3).nil? %>
@@ -120,8 +122,9 @@
                                                 <p class="card-text">¿Qué? <%=Product.find(purchase.product_id).name %>, <%= Product.find(purchase.product_id).description%></p>
                                                 <p class="card-text">¿Donde? <%=Product.find(purchase.product_id).user.city %>, <%= Product.find(purchase.product_id).user.province%></p>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <%= link_to 'Ver', purchase, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <div class="btn-group">
+                                                        <%= link_to 'Ver', purchase, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    </div>
                                                 </div>
                                                 <small class="text-muted"><%= time_ago_in_words(purchase.created_at) %></small>
                                             </div>
@@ -184,118 +187,143 @@
     <div class="modal fade" id="ProductModal" tabindex="-1" aria-labelledby="ProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ProductModalLabel">Mis productos</h5>
-            </div>
-            <div class="modal-body">
-                <% if @products.nil?  %>
-                    <p class="font-italic mb-0 center">Aún no tienes productos</p>
-                <% else  %>
-                    <div class="row">
-                        <% @products.each do |p1,p2,p3|  %> 
-                        
-                            <% if !p1.nil? %>
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                <% if p1.photos.present? %>
-                                    <%= image_tag(p1.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
-                                <% else  %>
-                                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                                <% end  %>
-                                <div class="card-body">
-                                    <span class='badge bg-warning text-dark my-2'><%= p1.category %></span>
-                                    <span class="badge bg-success text-dark my-2"><%= p1.r_action %></span>
-                                    <p class="card-text">¿Qué? <%=p1.name %>, <%= p1.description%></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                        <% if p1.user == current_user %>
-                                            <%= link_to 'Ver', p1, class: 'textos btn btn-form btn-outline-secondary'%>
-                                            <%= link_to 'Editar', edit_product_path(p1), class: 'textos btn btn-sm btn-outline-secondary'%>
-                                            <%= link_to 'Borrar', p1, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ProductModalLabel">Mis productos</h5>
+                </div>
+                <div class="modal-body">
+                    <% if @products.nil?  %>
+                        <p class="font-italic mb-0 center">Aún no tienes productos</p>
+                    <% else  %>
+                        <div class="row">
+                            <% @products.each do |p1,p2,p3|  %> 
+                            
+                                <% if !p1.nil? %>
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <% if p1.photos.present? %>
+                                            <%= image_tag(p1.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
                                         <% else  %>
-                                            <%= link_to '¡Lo quiero!', p1, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
-                                            <%= link_to 'Ver', p1, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                                         <% end  %>
+                                        
+                                        <div class="card-body">
+                                            <span class='badge bg-warning text-dark my-2'><%= p1.category %></span>
+                                            <span class="badge bg-success text-dark my-2"><%= p1.r_action %></span>
+                                            <p class="card-text">¿Qué? <%=p1.name %>, <%= p1.description%></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                <% if p1.user == current_user %>
+                                                    <%= link_to 'Ver', p1, class: 'textos btn btn-form btn-outline-secondary'%>
+                                                    <%= link_to 'Editar', edit_product_path(p1), class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <%= link_to 'Borrar', p1, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                <% else  %>
+                                                    <%= link_to '¡Lo quiero!', p1, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
+                                                    <%= link_to 'Ver', p1, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                <% end  %>
+                                                </div>
+                                                <small class="text-muted"><%= time_ago_in_words(p1.created_at) %></small>
+                                            </div>
                                         </div>
-                                        <small class="text-muted"><%= time_ago_in_words(p1.created_at) %></small>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                            <% end  %>
-
-                            <% if !p2.nil? %>
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                <% if p2.photos.present? %>
-                                    <%= image_tag(p2.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
-                                <% else  %>
-                                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                                 <% end  %>
-                                <div class="card-body">
-                                    <span class='badge bg-warning text-dark my-2'><%= p2.category %></span>
-                                    <span class="badge bg-success text-dark my-2"><%= p2.r_action %></span>
-                                    <p class="card-text">¿Qué? <%=p2.name %>, <%= p2.description%></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                        <% if p2.user == current_user %>
-                                            <%= link_to 'Ver', p2, class: 'textos btn btn-form btn-outline-secondary'%>
-                                            <%= link_to 'Editar', edit_product_path(p2), class: 'textos btn btn-sm btn-outline-secondary'%>
-                                            <%= link_to 'Borrar', p2, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+
+                                <% if !p2.nil? %>
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <% if p2.photos.present? %>
+                                            <%= image_tag(p2.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
                                         <% else  %>
-                                            <%= link_to '¡Lo quiero!', p2, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
-                                            <%= link_to 'Ver', p2, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                                         <% end  %>
+                                        <div class="card-body">
+                                            <span class='badge bg-warning text-dark my-2'><%= p2.category %></span>
+                                            <span class="badge bg-success text-dark my-2"><%= p2.r_action %></span>
+                                            <p class="card-text">¿Qué? <%=p2.name %>, <%= p2.description%></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <% if p2.user == current_user %>
+                                                        <%= link_to 'Ver', p2, class: 'textos btn btn-form btn-outline-secondary'%>
+                                                        <%= link_to 'Editar', edit_product_path(p2), class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                        <%= link_to 'Borrar', p2, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <% else  %>
+                                                        <%= link_to '¡Lo quiero!', p2, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
+                                                        <%= link_to 'Ver', p2, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <% end  %>
+                                                </div>
+                                                <small class="text-muted"><%= time_ago_in_words(p2.created_at) %></small>
+                                            </div>
                                         </div>
-                                        <small class="text-muted"><%= time_ago_in_words(p2.created_at) %></small>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                            <% end  %>
-
-                            <% if !p3.nil? %>
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                <% if p3.photos.present? %>
-                                    <%= image_tag(p3.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
-                                <% else  %>
-                                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                                 <% end  %>
-                                <div class="card-body">
-                                    <span class='badge bg-warning text-dark my-2'><%= p3.category %></span>
-                                    <span class="badge bg-success text-dark my-2"><%= p3.r_action %></span>
-                                    <p class="card-text">¿Qué? <%=p3.name %>, <%= p3.description%></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                        <% if p3.user == current_user %>
-                                            <%= link_to 'Ver', p3, class: 'textos btn btn-form btn-outline-secondary'%>
-                                            <%= link_to 'Editar', edit_product_path(p3), class: 'textos btn btn-sm btn-outline-secondary'%>
-                                            <%= link_to 'Borrar', p3, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+
+                                <% if !p3.nil? %>
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <% if p3.photos.present? %>
+                                            <%= image_tag(p3.photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
                                         <% else  %>
-                                            <%= link_to '¡Lo quiero!', p3, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
-                                            <%= link_to 'Ver', p3, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178fa88563b%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178fa88563b%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.0859375%22%20y%3D%22117.534375%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                                         <% end  %>
+                                        <div class="card-body">
+                                            <span class='badge bg-warning text-dark my-2'><%= p3.category %></span>
+                                            <span class="badge bg-success text-dark my-2"><%= p3.r_action %></span>
+                                            <p class="card-text">¿Qué? <%=p3.name %>, <%= p3.description%></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <% if p3.user == current_user %>
+                                                        <%= link_to 'Ver', p3, class: 'textos btn btn-form btn-outline-secondary'%>
+                                                        <%= link_to 'Editar', edit_product_path(p3), class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                        <%= link_to 'Borrar', p3, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <% else  %>
+                                                        <%= link_to '¡Lo quiero!', p3, class: 'textos btn btn-form btn-outline-secondary', data: { confirm: '¿Estás seguro?' }%>
+                                                        <%= link_to 'Ver', p3, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                    <% end  %>
+                                                </div>
+                                                <small class="text-muted"><%= time_ago_in_words(p3.created_at) %></small>
+                                            </div>
                                         </div>
-                                        <small class="text-muted"><%= time_ago_in_words(p3.created_at) %></small>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                            <% end  %>
+                                <% end  %>
 
-                        <% end  %>
-                    </div> 
-                <% end  %>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">Close</button>
-            </div>
+                            <% end  %>
+                        </div> 
+                    <% end  %>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="KPIModal" tabindex="-1" aria-labelledby="KPIModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="KPIModalLabel">Mis indicadores</h5>
+                </div>
+                <div class="modal-body">
+                    <div class='container'>
+                        <div id='KPI' class='container'>
+                            <p class='textos mx-auto'>Productos ofrecidos diariamente</p>
+                            <%= line_chart @products_group_by_day %>
+                        </div>
+                        <div class='container'>
+                            <p class='textos mx-auto'>Productos ofrecidos por categoría</p>
+                            <%= pie_chart @products_group_by_category %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
+    
 
 </div>
