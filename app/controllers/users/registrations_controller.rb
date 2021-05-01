@@ -9,6 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @counties = County.all
     @regions = Region.all
     super
+
+
   end
 
   # POST /resource

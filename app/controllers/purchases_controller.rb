@@ -1,3 +1,7 @@
+require 'sendgrid-ruby'
+include SendGrid
+require 'json'
+
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[ show edit update destroy cancel_purchase end_purchase ]
   before_action :authenticate_user!
@@ -26,10 +30,11 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.save
         @product = Product.find(params[:product_id])
-        @product.status = 1
-        @product.save
+        @product.update_status(1)
 
-        @chat = Chat.create(purchase_id: @purchase.id)
+        send_email_after_purchase(current_user, @product.user_id)
+
+        @chat = Chat.create!(purchase_id: @purchase.id)
 
         format.html { redirect_to @purchase, notice: "Este producto es tuyo. Contáctate con el dueño a través del un mensaje. Sigamos revalorizando <3" }
         format.json { render :show, status: :created, location: @purchase }
@@ -56,11 +61,12 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1 or /purchases/1.json
   def destroy
     product = Product.find(@purchase.product_id)
-    product.status = 0
-    product.save
+    product.update_status(0)
 
     @chat = Chat.find_by(purchase_id: @purchase.id)
-    @chat.destroy
+    if !@chat.nil?
+      @chat.destroy
+    end
 
     @purchase.destroy
     respond_to do |format|
@@ -70,12 +76,11 @@ class PurchasesController < ApplicationController
   end
 
   def cancel_purchase
-    @purchase.status = 1
+    purchase_params[:status] = 1
     product = Product.find(@purchase.product_id)
-    product.status = 0
-    product.save
+    product.update_status(0)
     respond_to do |format|
-      if @purchase.save
+      if @purchase.update( purchase_params[:status])
         format.html { redirect_to @purchase, alert: "La entrega fue cancelada por el dueño del producto" }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -86,9 +91,9 @@ class PurchasesController < ApplicationController
   end
 
   def end_purchase
-    @purchase.status = 2
+    purchase_params[:status] = 2
     respond_to do |format|
-      if @purchase.save
+      if @purchase.update(purchase_params[:status])
         format.html { redirect_to @purchase, notice: "Han revalorizado un producto.¡Felicitaciones!" }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -108,4 +113,38 @@ class PurchasesController < ApplicationController
     def purchase_params
       params.require(:purchase).permit(:user_id, :product_id, :status)
     end
+
+    def send_email_after_purchase(buyer_user, owner_user_id)
+      # using SendGrid's Ruby Library
+      # https://github.com/sendgrid/sendgrid-ruby
+
+      data = JSON.parse('{
+        "personalizations": [
+          {
+            "to": [
+              {
+                "email": "eduardorossel@outlook.cl"
+              }
+            ],
+            "subject": "Sending with Twilio SendGrid is Fun"
+          }
+        ],
+        "from": {
+          "email": "eduardorossel@outlook.cl"
+        },
+        "content": [
+          {
+            "type": "text/plain",
+            "value": "and easy to do anywhere, even with Ruby"
+          }
+        ]
+      }')
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+      response = sg.client.mail._("send").post(request_body: data)
+      puts response.status_code
+      puts response.body
+      puts response.headers
+      puts response
+    end
+
 end
