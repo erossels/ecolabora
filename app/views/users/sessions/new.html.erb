@@ -1,33 +1,37 @@
-<div class='container-fluid header'>
-  <div class='contaoner col-md-12 mx-auto my-3 center'>
-      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+<div class="row py-5 px-4 profile-body">
+  <div class="col-md-10 mx-auto">
+    <div class='container-fluid header py-2'>
+      <div class='contaoner col-md-12 mx-auto my-3 center'>
+          <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+      </div>
+      <div class='container col-md-4 mx-auto my-3'>
+        <h2 class='titulos'>Inicia sesión</h2>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field textos">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <div class="field textos">
+            <%= f.label "Contraseña" %><br />
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="field textos">
+              <%= f.check_box :remember_me, text: "Recuerdame" %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <div class="actions textos">
+            <%= f.submit "Ingresa" %>
+          </div>
+        <% end %>
+
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
   </div>
-  <div class='container col-md-4 mx-auto my-3'>
-    <h2 class='titulos'>Inicia sesión</h2>
-
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field textos">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="field textos">
-        <%= f.label "Contraseña" %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-
-      <% if devise_mapping.rememberable? %>
-        <div class="field textos">
-          <%= f.check_box :remember_me, text: "Recuerdame" %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
-
-      <div class="actions textos">
-        <%= f.submit "Ingresa" %>
-      </div>
-    <% end %>
-
-    <%= render "users/shared/links" %>
-  </div>
-</div>
+</div>  
