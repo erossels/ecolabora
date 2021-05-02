@@ -7,8 +7,13 @@ class Purchase < ApplicationRecord
   scope :pending, -> { where('status = 0') }
   scope :done, -> { where('status = 2') }
   
-  enum status: [ :pendiente, :cancelada, :hecha ] 
+  enum status: [ :pendiente, :cancelada, :entregado ] 
 
   ratyrate_rateable "product", "user"
+
+  def update_status(n)
+    self.status = n
+    self.save
+  end
 
 end

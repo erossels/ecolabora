@@ -76,31 +76,19 @@ class PurchasesController < ApplicationController
   end
 
   def cancel_purchase
-    purchase_params[:status] = 1
+    @purchase.update_status(1)
     product = Product.find(@purchase.product_id)
     product.update_status(0)
-    respond_to do |format|
-      if @purchase.update( purchase_params[:status])
-        format.html { redirect_to @purchase, alert: "La entrega fue cancelada por el dueño del producto" }
-        format.json { render :show, status: :ok, location: @purchase }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
-      end
-    end
+    
+    redirect_to @purchase, alert: "La entrega fue cancelada por el dueño del producto"
+
   end
 
-  def end_purchase
-    purchase_params[:status] = 2
-    respond_to do |format|
-      if @purchase.update(purchase_params[:status])
-        format.html { redirect_to @purchase, notice: "Han revalorizado un producto.¡Felicitaciones!" }
-        format.json { render :show, status: :ok, location: @purchase }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
-      end
-    end
+  def end_purchase  
+    @purchase.update_status(2)
+
+    redirect_to @purchase, notice: "Han revalorizado un producto.¡Felicitaciones!"
+
   end
 
   private
@@ -123,7 +111,7 @@ class PurchasesController < ApplicationController
           {
             "to": [
               {
-                "email": "eduardorossel@outlook.cl"
+                "email": "erossel@kyklos.cl"
               }
             ],
             "subject": "Sending with Twilio SendGrid is Fun"

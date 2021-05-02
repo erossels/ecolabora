@@ -41,7 +41,7 @@
                         <span class='badge bg-warning text-dark my-2'><%= p1.category %></span>
                         <span class="badge bg-success text-dark my-2"><%= p1.r_action %></span>
                         <p class="card-text">¿Quién?: <%= p1.user %></p>
-                        <p class="card-text">¿Qué? <%=p1.name %>, <%= p1.description%></p>
+                        <p class="card-text">¿Qué? <%=p1.name %>: <span><%= raw(p1.description)%></p></span>
                         <p class="card-text">¿Donde? <%=p1.user.city %>, <%= p1.user.province%></p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">

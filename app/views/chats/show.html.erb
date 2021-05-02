@@ -11,7 +11,7 @@
   <% product = Product.find(@purchase.product_id)  %>
 
   <div class='container row mx-auto textos'>
-    <div class='container col-md-4'>
+    <div class='container col-md-5'>
       <div class='row mx-auto align-items-center justify-content-center p-2 rounded shadow-sm bg-light max-size-box'>
           <div class='container col-md-8'>
             <% if product.photos.present?   %>
@@ -54,28 +54,26 @@
       </div>
     </div>
 
-    <div class='container col-md-8 mb-4 px-3'>
+    <div class='container col-md-7 mb-4 px-3'>
       <div class="card-chat mx-3 textos">
               <div class="card-chat-header msg_head">
                 <div class="d-flex bd-highlight">
-                  <div class="img_cont">
-                    <%= image_tag(current_user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img mx-1 mt-2")%>
-                    <span class="online_icon"></span>
-                  </div>
-                  <div class="user_info">
-                    <span><%= @purchase.user %></span>
+                  <div class='container p-3 m-2'>
+                    <h5 class='icon-negative'>Muro de mensajes</h5>
                   </div>
                 </div>
-                <span id="action_menu_btn"><i class="fas fa-ellipsis-v iconos mx-3"></i></span>
               </div>
-              <div class="bg-light msg_card_body textos border">
+              <div class="bg-light msg_card_body textos border p-3">
                 <% if !@messages.nil?  %>
                   <% @messages.each do |message| %>
                     <% if message.user_id == @purchase.user_id  %>
                       <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                          <%= image_tag(User.find(@purchase.user_id).avatar, alt:"Foto_de_producto", class:"rounded-circle user_img_msg")%>
+                        </div>
                         <div class="msg_container_custom">
                           <%= raw message.content%>
-                          <span class="msg_time textos"><%= time_ago_in_words(message.created_at) %></span>
+                          <span class="msg_time text-dark textos"><%= time_ago_in_words(message.created_at) %></span>
                         </div>
                       </div>
                     <% elsif message.user_id == product.user_id %>

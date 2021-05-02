@@ -1,12 +1,18 @@
-<div class='container-fluid header'>
-  <div class='contaoner col-md-12 mx-auto my-3 center'>
-      <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
-  </div>
-  <div class='container col-md-10 mx-auto my-3'>
-    <h2 class='titulos'>Crea un nuevo producto</h2>
+<div class='container-fluid home-body'>
+  <div class='container py-5 px-2 mx-auto'>
 
-    <%= render 'form', product: @product %>
+    <div class='container-fluid header p-2'>
+      <div class='contaoner col-md-12 mx-auto my-3 center'>
+          <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+      </div>
+      <div class='container col-md-10 mx-auto my-3'>
+        <h2 class='titulos'>Crea un nuevo producto</h2>
 
-    | <%= link_to 'Volver al Home', products_path, class: 'btn btn-link' %>
+        <%= render 'form', product: @product %>
+
+        | <%= link_to 'Volver al Home', products_path, class: 'btn btn-link' %>
+      </div>
+    </div> 
   </div>
-</div> 
+</div>
+  
