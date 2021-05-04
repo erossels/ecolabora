@@ -266,6 +266,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rollbar (3.1.2)
     ruby-vips (2.1.0)
       ffi (~> 1.12)
     ruby2_keywords (0.0.4)
@@ -358,6 +359,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.6)
   ratyrate (~> 1.2.alpha)
+  rollbar (~> 3.1)
   sass-rails (>= 6)
   selenium-webdriver
   sendgrid-ruby

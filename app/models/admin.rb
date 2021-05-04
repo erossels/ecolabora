@@ -5,5 +5,6 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :news
   validates :email, :uniqueness => { :case_sensitive => false }
+  after_validation :report_validation_errors_to_rollbar
 
 end

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :evaluations, through: :purchases, dependent: :destroy
   ratyrate_rater
+  after_validation :report_validation_errors_to_rollbar
 
   def to_s
     first_name

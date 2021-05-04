@@ -86,3 +86,5 @@ gem "chartkick", "~> 4.0"
 gem "groupdate", "~> 5.2"
 
 gem 'sendgrid-ruby'
+
+gem "rollbar", "~> 3.1"

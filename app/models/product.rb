@@ -15,6 +15,8 @@ class Product < ApplicationRecord
   validates :description, presence: {message: 'El producto debe tener una descripción'}
   validates :r_action, presence: {message: 'El producto debe tener asociada una acción'}
 
+  after_validation :report_validation_errors_to_rollbar
+
   def update_status(n)
     self.status = n
     self.save

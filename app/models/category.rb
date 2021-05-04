@@ -5,6 +5,7 @@ class Category < ApplicationRecord
   has_many :categories, dependent: :destroy
 
   validates :name, presence: { message: "La categoría debe llevar un nombre" }
+  after_validation :report_validation_errors_to_rollbar
 
   def to_s
     name
