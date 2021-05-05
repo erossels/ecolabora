@@ -1,7 +1,7 @@
 require 'faker'
 
 r_actions = [0, 1, 2]
-status_num = [0, 1]
+status_num = [0]
 
 10.times do |i|
 
@@ -12,7 +12,7 @@ status_num = [0, 1]
       r_action: r_actions.sample,
       status: status_num.sample,
       user_id: i + 1,
-      category_id: j
+      category_id: j+1
     )
   end
 
