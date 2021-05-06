@@ -27,7 +27,7 @@
                         <h5 class="font-weight-bold mb-0 d-block"><%= @purchases.count %></h5><small class="text-muted"> <i class="fas fa-handshake mr-2"></i>Productos recibidos </small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= rating_for_user @purchase, current_user, 'user', star: 5 %></h5><small class="text-muted"> <i class="fas fa-star mr-2"></i>Calificación promedio</small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @purchase.present? ? (rating_for_user @purchase, current_user, 'user', star: 5) : 0  %></h5><small class="text-muted"> <i class="fas fa-star mr-2"></i>Calificación promedio</small>
                     </li>
                 </ul>
 

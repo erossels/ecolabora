@@ -59,18 +59,20 @@
 
         <!-- Modal -->
       <div class="modal fade" id="PhotosModal" tabindex="-1" aria-labelledby="PhotosModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-dialog modal-dialog-scrollable modal-xl">
               <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="PhotosModalLabel"><% @product.name  %></h5>
+                  <h5 class="modal-title textos" id="PhotosModalLabel"><%= @product.name  %></h5>
               </div>
               <div class="modal-body">
                   <% if !@product.photos.attached?  %>
                       <p class="font-italic mb-0 center">No hay fotos</p>
                   <% else  %> 
-                      <% @product.photos.each do |photo| %> 
-                        <%= image_tag(photo, alt:"Foto_de_producto", class:"rounded mx-auto d-block", style:"height: 300px; width: 300px")%>
-                      <% end  %>
+                      <div class='row'>
+                        <% @product.photos.each do |photo| %> 
+                          <%= image_tag(photo, alt:"Foto_de_producto", class:"rounded mx-auto d-block p-2 img-fluid", style:"height: 300px; width: 300px")%>
+                        <% end  %>
+                      </div>
                   <% end  %>
               </div>
               <div class="modal-footer">
