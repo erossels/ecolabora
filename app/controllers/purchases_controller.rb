@@ -82,12 +82,16 @@ class PurchasesController < ApplicationController
     
     redirect_to @purchase, alert: "La entrega fue cancelada por el dueño del producto"
 
+    send_email_after_cancelling(current_user, @product.user_id)
+
   end
 
   def end_purchase  
     @purchase.update_status(2)
 
     redirect_to @purchase, notice: "Han revalorizado un producto.¡Felicitaciones!"
+
+    send_email_after_success(current_user, @product.user_id)
 
   end
 
@@ -103,36 +107,45 @@ class PurchasesController < ApplicationController
     end
 
     def send_email_after_purchase(buyer_user, owner_user_id)
-      # using SendGrid's Ruby Library
-      # https://github.com/sendgrid/sendgrid-ruby
+      from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+      to = SendGrid::Email.new(email: User.find(owner_user_id).email)
+      subject = 'Has adquirido un producto'
+      content = SendGrid::Content.new(type: 'text/plain', value: 'Alguien necesita uno de tus productos, ponte en contacto con el ingresando a Ecolabora')
+      mail = SendGrid::Mail.new(from, subject, to, content)
 
-      data = JSON.parse('{
-        "personalizations": [
-          {
-            "to": [
-              {
-                "email": "erossel@kyklos.cl"
-              }
-            ],
-            "subject": "Sending with Twilio SendGrid is Fun"
-          }
-        ],
-        "from": {
-          "email": "eduardorossel@outlook.cl"
-        },
-        "content": [
-          {
-            "type": "text/plain",
-            "value": "and easy to do anywhere, even with Ruby"
-          }
-        ]
-      }')
       sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
-      response = sg.client.mail._("send").post(request_body: data)
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
       puts response.status_code
       puts response.body
       puts response.headers
-      puts response
+    end
+
+    def send_email_after_cancelling(buyer_user, owner_user_id)
+      from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+      to = SendGrid::Email.new(email: buyer_user.email)
+      subject = 'Han cancelado tu orden'
+      content = SendGrid::Content.new(type: 'text/plain', value: 'El dueño de este producto ha cancelado esta entrega.')
+      mail = SendGrid::Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
+      puts response.status_code
+      puts response.body
+      puts response.headers
+    end
+
+    def send_email_after_success(buyer_user, owner_user_id)
+      from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+      to = SendGrid::Email.new(email: buyer_user.email)
+      subject = 'Felicitaciones! Has ecolaborado para construir un mundo más sustentable.'
+      content = SendGrid::Content.new(type: 'text/plain', value: 'Has concretado una entrega. Si no es así, contáctaté con nosotros.')
+      mail = SendGrid::Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
+      puts response.status_code
+      puts response.body
+      puts response.headers
     end
 
 end

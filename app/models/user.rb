@@ -11,7 +11,16 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :evaluations, through: :purchases, dependent: :destroy
   ratyrate_rater
+
+  validates :email, uniqueness: true
+  validates :first_name, presence: {message: 'Debes incluir tu nombre'}
+  validates :last_name, presence: {message: 'Debes incluir un apellido'}
+  validates :address, presence: {message: 'Debes incluir una dirección'}
+  validates :province, presence: {message: 'Debes seleccionar una región'}
+  validates :city, presence: {message: 'Debes seleccionar una comuna'}
+
   after_validation :report_validation_errors_to_rollbar
+
 
   def to_s
     first_name

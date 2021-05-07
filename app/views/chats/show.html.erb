@@ -46,7 +46,7 @@
         <%= link_to 'Mi perfil', user_profile_path, class:'btn btn-form textos col-6  d-block mx-auto my-1' %>
         <% if current_user == User.find(@purchase.user_id) %>
           <%= link_to 'No lo quiero', @purchase, method: :delete, data: { confirm: '¿Seguro? Esta bien, alguien quizás lo necesite más' }, class:'btn btn-danger textos col-6   d-block mx-auto my-1'  %>
-        <% elsif (current_user == User.find(Product.find(@purchase.product_id).user_id)) && (@purchase.status == 'pendiente') %>
+        <% elsif (current_user == User.find(Product.find(@purchase.product_id).user_id)) && (@purchase.status == 'Pendiente') %>
           <%= link_to 'Cancelar', cancel_purchase_path(@purchase), data: { confirm: "¿Seguro?, #{@purchase.user} lo quiere." }, class:'btn btn-danger textos col-6   d-block mx-auto my-1'  %>
           <%= link_to 'Finalizar', end_purchase_path(@purchase), data: { confirm: '¿Seguro? Sería una gran noticia.' }, class:'btn btn-success textos col-6   d-block mx-auto my-1'  %>
         <% end %>

@@ -24,7 +24,7 @@
                         <h5 class="font-weight-bold mb-0 d-block"><%= @products.count %></h5><small class="text-muted"> <i class="fab fa-product-hunt mr-2"></i>Productos ofrecidos</small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= @purchases.count %></h5><small class="text-muted"> <i class="fas fa-handshake mr-2"></i>Productos recibidos </small>
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @purchases.where(status: 2).count %></h5><small class="text-muted"> <i class="fas fa-handshake mr-2"></i>Productos recibidos </small>
                     </li>
                     <li class="list-inline-item">
                         <h5 class="font-weight-bold mb-0 d-block"><%= @purchase.present? ? (rating_for_user @purchase, current_user, 'user', star: 5) : 0  %></h5><small class="text-muted"> <i class="fas fa-star mr-2"></i>Calificación promedio</small>
@@ -116,7 +116,7 @@
                                 <% if !purchase.nil?  %>
                                     <div class="col-md-4">
                                         <div class="card mb-4 box-shadow">
-                                            <% if Product.find(purchase.product_id).photos.present? && purchase != 'pendiente' %>
+                                            <% if Product.find(purchase.product_id).photos.present? && purchase != 'Pendiente' %>
                                                 <%= image_tag(Product.find(purchase.product_id).photos.first.variant(colorspace: "Gray"), alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
                                             <% elsif Product.find(purchase.product_id).photos.present? %>
                                                 <%= image_tag(Product.find(purchase.product_id).photos.first, alt:"Foto_de_producto", class:"card-img-top", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;")%>
@@ -124,15 +124,16 @@
                                             <div class="card-body">
                                                 <span class='badge bg-warning text-dark my-2'><%= Product.find(purchase.product_id).category %></span>
                                                 <span class="badge bg-success text-dark my-2"><%= Product.find(purchase.product_id).r_action %></span>
-                                                <% if purchase.status != 'entregado' %>
+                                                <% if purchase.status == 'Entregado' %>
                                                     <h3><span class="badge bg-danger my-2 sold-badge">Recibido</span></h3>
                                                 <% end  %>
                                                 <p class="card-text">¿Quién?: <%= Product.find(purchase.product_id).user %></p>
-                                                <p class="card-text">¿Qué? <%=Product.find(purchase.product_id).name %>, <%= Product.find(purchase.product_id).description%></p>
+                                                <p class="card-text">¿Qué? <%=Product.find(purchase.product_id).name %>, <%= raw(Product.find(purchase.product_id).description)%></p>
                                                 <p class="card-text">¿Donde? <%=Product.find(purchase.product_id).user.city %>, <%= Product.find(purchase.product_id).user.province%></p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="btn-group">
                                                         <%= link_to 'Ver', purchase, class: 'textos btn btn-sm btn-outline-secondary'%>
+                                                        <%= link_to 'No lo quiero', purchase, method: :delete, data: { confirm: '¿Seguro? Esta bien, alguien quizás lo necesite más' }, class:'btn btn-danger textos'  %>
                                                     </div>
                                                 </div>
                                                 <small class="text-muted"><%= time_ago_in_words(purchase.created_at) %></small>

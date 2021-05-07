@@ -1,3 +1,7 @@
+require 'sendgrid-ruby'
+include SendGrid
+require 'json'
+
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
@@ -23,6 +27,10 @@ class MessagesController < ApplicationController
   # POST /messages or /messages.json
   def create
     @message = Message.new(message_params)
+
+    buyer = User.find(Purchase.find(Chat.find(message_params[:chat_id]).purchase_id).user_id)
+    owner = User.find(Product.find(Purchase.find(Chat.find(message_params[:chat_id]).purchase_id).product_id).user_id)
+    email_after_sending_message(buyer, owner)
 
     respond_to do |format|
       if @message.save
@@ -67,4 +75,35 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:chat_id, :user_id, :content)
     end
+    
+    def email_after_sending_message(buyer, owner)
+      #mail to buyer
+
+      from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+      to = SendGrid::Email.new(email: buyer.email)
+      subject = 'Hay un nuevo mensaje en el muro de tu compra'
+      content = SendGrid::Content.new(type: 'text/plain', value: 'Hay un nuevo mensaje en el muro de tu compra')
+      mail = SendGrid::Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
+      puts response.status_code
+      puts response.body
+      puts response.headers
+
+      #mail to owner
+
+      from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+      to = SendGrid::Email.new(email: owner.email)
+      subject = 'Hay un nuevo mensaje en el muro de tu compra'
+      content = SendGrid::Content.new(type: 'text/plain', value: 'Hay un nuevo mensaje en el muro de tu compra')
+      mail = SendGrid::Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
+      puts response.status_code
+      puts response.body
+      puts response.headers
+    end
+
 end

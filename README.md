@@ -15,4 +15,19 @@ El modelo de base de datos utilizado puede encontrarse aquí [Aquí](https://dbd
 
 Se utiliza trello para gestionar el desarrollo del proyecto. Las historias de usuario y el avance en el desarrollo se pueden observar en [Panel Ecolabora](https://trello.com/b/tGVNQ2K0/ecolabora)
 
+## Deployment
+
+Para el despliegue de la aplicación solo debes acceder al repositorio y descargar la carpeta del proyecto. Luego en el terminal
+```
+  bundle
+  heroku create
+  heroku run rails db:migrate
+  heroku run yarn add
+  heroku run rails db:seed
+```
+
+El usuario administrador admin1@mail.cl y clave 123456, puede servir como punto de partida para gestionar el panel de administración. Se recomienda editar y eliminar este acceso, una vez desplegada la aplicación. 
+
+
+
 
