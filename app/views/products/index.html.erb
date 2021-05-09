@@ -13,11 +13,13 @@
         <div class='col-4'>
           <%= link_to 'Sube un producto', new_product_path, class: 'textos btn-form btn my-2' %>
         </div>  
-        <div class='col-s-12 col-md-4'>
-          <form class="d-flex">
-            <input class="form-control my-2 textos" type="search" placeholder="¿Que necesitas?" aria-label="Search">
-            <button class="btn btn-outline-success my-2 textos" type="submit">Buscar</button>
-          </form>
+        <div class='col-s-12 col-md-4'>                   
+          <div class="d-flex">
+            <%= form_tag(products_path, method: :get) do %> 
+              <%= text_field_tag(:search, params[:search], options:{class:"form-control my-2 textos", placeholder:'¿Qué necesitas?'}) %>
+              <%= submit_tag "Buscar", class:'btn btn-outline-success my-2 textos' %>
+            <% end  %>
+          </div>
         </div>
       </div>
     </section>

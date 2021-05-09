@@ -5,8 +5,11 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.with_attached_photos.all
-    @products = @products.order(created_at: :desc)
+    if params[:search].present?
+      @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
+    else
+      @products = Product.with_attached_photos.all.order(created_at: :desc)
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -68,7 +71,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:category_id, :user_id, :name, :description, :r_action, :status, photos: [])
+      params.require(:product).permit(:category_id, :user_id, :name, :description, :r_action, :status, :search, photos: [])
     end
 
     def set_categories
