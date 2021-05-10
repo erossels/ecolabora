@@ -70,7 +70,7 @@
                                                 <h3><span class="badge bg-danger my-2 sold-badge"><%= @all_purchases.find_by(product_id: product.id).status %></span></h3>
                                             <% end  %>
                                             <p class="card-text">¿Quién?: <%= product.user %></p>
-                                            <p class="card-text">¿Qué? <%=product.name %>, <%= product.description%></p>
+                                            <p class="card-text">¿Qué? <%=product.name %>, <%= raw(product.description)%></p>
                                             <p class="card-text">¿Donde? <%=product.user.city %>, <%= product.user.province%></p>
                                             <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">

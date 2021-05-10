@@ -13,13 +13,14 @@
         <div class='col-4'>
           <%= link_to 'Sube un producto', new_product_path, class: 'textos btn-form btn my-2' %>
         </div>  
-        <div class='col-s-12 col-md-4'>                   
+        <div class='col-s-12 col-md-4 row align-items-center justify-content-center'>                   
           <div class="d-flex">
             <%= form_tag(products_path, method: :get) do %> 
               <%= text_field_tag(:search, params[:search], options:{class:"form-control my-2 textos", placeholder:'¿Qué necesitas?'}) %>
-              <%= submit_tag "Buscar", class:'btn btn-outline-success my-2 textos' %>
+              <%= submit_tag "Buscar", class:'btn btn-warning my-2 textos' %>
             <% end  %>
           </div>
+          <i class="far fa-bell fa-2x d-block mx-1" data-toggle="tooltip" data-placement="right" title="Crea una alerta"></i>
         </div>
       </div>
     </section>
@@ -130,4 +131,22 @@
     </div>
     
   </div>
+
+    <!-- Modal -->
+  <div class="modal fade" id="AlertModal" tabindex="-1" aria-labelledby="AlertModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="AlertModalLabel">Crea una alerta</h5>
+              </div>
+              <div class="modal-body">
+                <%= render 'alerts/new' %>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
 </div>

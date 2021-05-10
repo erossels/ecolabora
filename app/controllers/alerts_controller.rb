@@ -26,7 +26,7 @@ class AlertsController < ApplicationController
 
     respond_to do |format|
       if @alert.save
-        format.html { redirect_to @alert, notice: "Alert was successfully created." }
+        format.html { redirect_to root_path, notice: "Has creado una nueva alerta. Pronto te avisaremos cuando encontremos lo que buscas" }
         format.json { render :show, status: :created, location: @alert }
       else
         format.html { render :new, status: :unprocessable_entity }

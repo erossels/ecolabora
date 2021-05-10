@@ -11,17 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+  <%= form.hidden_field :user_id, :value => params[:user_id] = current_user.id %>
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <%= form.label :content, "Contenido" %>
+    <%= form.text_field :content %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Crear alerta" %>
   </div>
 <% end %>

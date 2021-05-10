@@ -1,3 +1,7 @@
+require 'sendgrid-ruby'
+include SendGrid
+require 'json'
+
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :set_categories
@@ -5,6 +9,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+    @alert = Alert.new
     if params[:search].present?
       @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
     else
@@ -32,6 +37,9 @@ class ProductsController < ApplicationController
     @product.status = 0
     respond_to do |format|
       if @product.save
+        
+        send_emails_for_alerts(@product)
+
         format.html { redirect_to @product, notice: "Has creado un producto. Ojalá encuentre un nuevo hogar pronto :)" }
         format.json { render :show, status: :created, location: @product }
       else
@@ -77,4 +85,25 @@ class ProductsController < ApplicationController
     def set_categories
       @categories = Category.all
     end 
+
+    def send_emails_for_alerts(product)
+      alerts = Alert.all
+      alerts.each do |alert|
+        if product.description.include?(alert.content) || product.name.include?(alert.content)
+          from = SendGrid::Email.new(email: 'eduardorossel@outlook.cl')
+          to = SendGrid::Email.new(email: User.find(alert.user_id).email)
+          subject = 'Lo que buscas ya está en Ecolabora'
+          content = SendGrid::Content.new(type: 'text/plain', value: 'Alguien ha agregado algo que buscas. Este producto responde a los criterios de tus alertas. Búscalo en Ecolabora')
+          mail = SendGrid::Mail.new(from, subject, to, content)
+
+          sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+          response = sg.client.mail._('send').post(request_body: mail.to_json)
+          puts response.status_code
+          puts response.body
+          puts response.headers
+
+        end
+      end
+    end
+  
 end
