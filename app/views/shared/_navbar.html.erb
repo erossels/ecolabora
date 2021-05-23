@@ -16,7 +16,9 @@
         <li role="separator" class="divider"></li>
         <li class="nav-item">
           <div class="img_cont d-sm-none d-md-block">
-            <%= image_tag(current_user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img mx-auto mt-3 ml-3")%>
+            <% if current_user.avatar.present?  %>
+              <%= image_tag(current_user.avatar, alt:"Foto_de_producto", class:"rounded-circle user_img mx-auto mt-3 ml-3")%>
+            <% end  %>
           </div>
         </li>
       <% else  %>
