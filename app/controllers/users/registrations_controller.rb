@@ -15,6 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    @counties = County.all
+    @regions = Region.all
     super
   end
 
