@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
       click: function(score, evt) {
         var _this = this;
         if (score == null) { score = 0; }
-        $.post('<%= rate_path %>',
+        $.post('http://ecolabora.herokuapp.com/rate',
         {
           score: score,
           dimension: $(this).attr('data-dimension'),
