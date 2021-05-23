@@ -34,6 +34,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        format.js { render nothing: true}
         format.html { redirect_to Chat.find(message_params[:chat_id]), notice: "Mensaje enviado" }
         format.json { render :show, status: :created, location: @message }
       else

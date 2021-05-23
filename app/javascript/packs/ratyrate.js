@@ -35,7 +35,7 @@ document.addEventListener("turbolinks:load", function(){
       click: function(score, evt) {
         var _this = this;
         if (score == null) { score = 0; }
-        $.post('http://localhost:3000/rate',
+        $.post('http://ecolabora.herokuapp.com/rate',
         {
           score: score,
           dimension: $(this).attr('data-dimension'),

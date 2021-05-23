@@ -4,7 +4,7 @@ class NewsController < ApplicationController
 
   # GET /news or /news.json
   def index
-    @news = News.all
+    @news = News.with_attached_photo.all.order(created_at: :desc)
   end
 
   # GET /news/1 or /news/1.json

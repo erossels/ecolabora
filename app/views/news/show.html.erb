@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class='container-fluid home-body'>
+  <div class='container py-5 px-2 mx-auto'>
 
-<p>
-  <strong>Title:</strong>
-  <%= @news.title %>
-</p>
+    <div class='container-fluid header p-2'>
+      <div class='contaoner col-md-12 mx-auto my-3 center'>
+          <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+      </div>
+      <div class='container col-md-10 mx-auto my-3'>
+        <h2 class='titulos my-2'>Detalle noticia</h2>
 
-<p>
-  <strong>Content:</strong>
-  <%= @news.content %>
-</p>
+        
+        <p class='textos'>
+          <strong>Título: </strong>
+          <%= @news.title %>
+        </p>
 
-<p>
-  <strong>Admin:</strong>
-  <%= @news.admin_id %>
-</p>
+        <p class='textos'>
+          <strong>Contenido:</strong>
+          <%= @news.content %>
+        </p>
 
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
+        <%= link_to 'Editar', edit_news_path(@news),  class:'textos' %> |
+        <%= link_to 'Volver', news_index_path,  class:'textos' %>
+  
+        </div>
+      </div> 
+    </div>
+  </div>

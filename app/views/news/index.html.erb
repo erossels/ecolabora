@@ -1,31 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class='container-fluid home-body'>
+  <div class='container py-5 px-2 mx-auto'>
 
-<h1>News</h1>
+    <div class='container-fluid header p-2'>
+      <div class='contaoner col-md-12 mx-auto my-3 center'>
+          <%= image_tag("Ecolabora.png", class: "mx-auto small-logo d-block") %>
+      </div>
+      <div class='container col-md-10 mx-auto my-3'>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <div>
+          <h2 class='titulos my-2'>Noticias</h2>
 
-  <tbody>
-    <% @news.each do |news| %>
-      <tr>
-        <td><%= news.title %></td>
-        <td><%= news.content %></td>
-        <td><%= news.admin_id %></td>
-        <td><%= link_to 'Show', news %></td>
-        <td><%= link_to 'Edit', edit_news_path(news) %></td>
-        <td><%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <%= link_to 'Nueva noticia', new_news_path, class:'btn textos btn-form center ml-auto d-block col-3'%>
+        </div>
+        <table class='table textos my-4'>
+          <thead>
+            <tr>
+              <th class='textos'>Título</th>
+              <th class='textos'>Contenido</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
 
-<br>
+          <tbody>
+            <% @news.each do |news| %>
+              <tr>
+                <td class='textos'><%= news.title %></td>
+                <td class='textos'><%= news.content %></td>
+                <td class='textos'><%= link_to 'Ver', news %></td>
+                <td class='textos'><%= link_to 'Editar', edit_news_path(news) %></td>
+                <td class='textos'><%= link_to 'Borrar', news, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+    </div> 
+  </div>
+</div>
 
-<%= link_to 'New News', new_news_path %>
+
