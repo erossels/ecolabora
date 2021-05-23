@@ -8,7 +8,7 @@
       <div class="carousel-item active" data-interval="10000">
         <%= image_tag("carousel-1.jpg", class: "d-block custom-carusel imagenesCarro mt-5") %>
         <div class="carousel-caption d-none d-md-block carousel-caption titulos mb-3">
-          <h1 class='display-4 text-carousel custom-carousel'>Haz comunidad y revaloriza</h1>
+          <h1 class='display-4 text-carousel custom-carousel'>Haz que tu residuo <br> muestre su valor</h1>
         </div>
       </div>
       <div class="carousel-item" data-interval="2000">
@@ -16,7 +16,7 @@
         <%= image_tag("carousel-1.jpg", class: "d-block custom-carusel imagenesCarro") %>
         </div>
         <div class="carousel-caption d-none d-md-block carousel-caption titulos">
-          <h1 class='display-4 text-carousel custom-carousel'>Da y recibe cerca de ti</h1>
+          <h1 class='display-4 text-carousel custom-carousel'>Haz comunidad y ecolabora</h1>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <div class="col-md-7">
         <h2 class="featurette-heading titulos">¿Qué es Ecolabora?</h2>
         <h3 class='textos'>El tinder de la economía circular</h3>
-        <p class="lead textos">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <p class="lead textos">Una plataforma donde tus residuos o materiales en desuso hacen match con pymes locales y personas que los pueden usar o transformar.</p>
       </div>
       <div class="col-md-5">
         <%= image_tag("Ecolabora.png", class: "featurette-image img-fluid mx-auto logo") %>
@@ -62,7 +62,7 @@
           <% end  %>
           <div class='card-body'>  
             <h2 class='titulos textos-news'><%= n.title %></h2>
-            <p class='textos-news'><%= n.content %></p>
+            <p class='textos-news'><%= raw(n.content) %></p>
             <p><a class="btn btn-secondary textos btn-noticias" href="#" role="button">Ver más »</a></p>
           </div>
         </div>
