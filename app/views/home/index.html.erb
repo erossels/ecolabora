@@ -55,7 +55,11 @@
     <div class="row my-5 mx-0">
     <% @news.each do |n| %>
         <div class="col-lg-4 card p-0 mx-auto">
-          <%= image_tag("carousel-4.jpg", class: "card-head") %>
+          <% if n.photo.present? %> 
+            <%= image_tag(n.photo, class: "card-head", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;") %>
+          <% else %> 
+            <%= image_tag("carousel-4.jpg", class: "card-head", alt:"Thumbnail [100%x225]", style:"height: 225px; width: 100%; display: block;") %>
+          <% end  %>
           <div class='card-body'>  
             <h2 class='titulos textos-news'><%= n.title %></h2>
             <p class='textos-news'><%= n.content %></p>
