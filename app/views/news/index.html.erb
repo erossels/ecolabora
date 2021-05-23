@@ -25,7 +25,7 @@
             <% @news.each do |news| %>
               <tr>
                 <td class='textos'><%= news.title %></td>
-                <td class='textos'><%= news.content %></td>
+                <td class='textos'><%= raw(news.content) %></td>
                 <td class='textos'><%= link_to 'Ver', news %></td>
                 <td class='textos'><%= link_to 'Editar', edit_news_path(news) %></td>
                 <td class='textos'><%= link_to 'Borrar', news, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>

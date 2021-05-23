@@ -16,7 +16,7 @@
 
         <p class='textos'>
           <strong>Contenido:</strong>
-          <%= @news.content %>
+          <%= raw(@news.content) %>
         </p>
 
         <%= link_to 'Editar', edit_news_path(@news),  class:'textos' %> |
