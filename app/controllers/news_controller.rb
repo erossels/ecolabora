@@ -26,7 +26,7 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: "News was successfully created." }
+        format.html { redirect_to @news, notice: "La noticia se creó con éxito." }
         format.json { render :show, status: :created, location: @news }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class NewsController < ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: "News was successfully updated." }
+        format.html { redirect_to @news, notice: "La noticia fue actualizada" }
         format.json { render :show, status: :ok, location: @news }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class NewsController < ApplicationController
   def destroy
     @news.destroy
     respond_to do |format|
-      format.html { redirect_to news_index_url, notice: "News was successfully destroyed." }
+      format.html { redirect_to news_index_url, notice: "La noticia fue eliminada satisfactoriamente." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class NewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def news_params
-      params.require(:news).permit(:title, :content, :admin_id)
+      params.require(:news).permit(:title, :content, :photo, :admin_id)
     end
 end

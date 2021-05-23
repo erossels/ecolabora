@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class=''>
+  <div class='container'>
     <div class="field">
       <%= form.label :title, 'Título' %>
       <%= form.text_field :title %>
@@ -19,7 +19,7 @@
 
     <div class="field">
       <%= form.label :content, 'Contenido' %>
-      <%= form.text_field :content, 'data-provider': :summernote %>
+      <%= form.text_area :content, class:"form-control", 'data-provider': :summernote %>
     </div>
 
     <div class='field textos'>
@@ -31,6 +31,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Crear noticia', class:"btn btn-form"%>
   </div>
 <% end %>
