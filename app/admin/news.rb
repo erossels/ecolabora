@@ -1,4 +1,4 @@
-ActiveAdmin.register User do
+ActiveAdmin.register News do
 
   permit_params do
     permitted = [:title, :content, :created_at, :admin_id]
