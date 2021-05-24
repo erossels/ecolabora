@@ -11,7 +11,12 @@ class ProductsController < ApplicationController
   def index
     @alert = Alert.new
     if params[:search].present?
-      @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
+      if params[:type] == "Local"
+        @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
+        @products.local
+      else
+        @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
+      end
     else
       @products = Product.with_attached_photos.all.order(created_at: :desc)
     end

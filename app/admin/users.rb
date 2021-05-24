@@ -17,6 +17,7 @@ ActiveAdmin.register User do
     column :n_address
     column :city
     column :province
+    column :banned
     actions
   end
 
