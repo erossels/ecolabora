@@ -11,12 +11,12 @@
           <%= render "users/shared/error_messages", resource: resource %>
 
           <div class="field textos">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.label :email, "Ingresa un correo (*)" %><br /> 
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %> 
           </div>
 
           <div class="field textos">
-            <%= f.label "Crea tu contraseña" %>
+            <%= f.label "Crea tu contraseña (*)" %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
             <% end %><br />
@@ -24,17 +24,17 @@
           </div>
 
           <div class="field textos">
-            <%= f.label "Confirma tu contraseña" %><br />
+            <%= f.label "Confirma tu contraseña (*)" %><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
 
           <div class="field textos">
-            <%= f.label "Nombre"%><br />
+            <%= f.label "Nombre (*)"%><br />
             <%= f.text_field :first_name %>
           </div>
 
           <div class="field textos">
-            <%= f.label "Apellido"%><br />
+            <%= f.label "Apellido (*)"%><br />
             <%= f.text_field :last_name %>
           </div>
 
@@ -44,22 +44,22 @@
           </div>
 
           <div class="field textos">
-            <%= f.label "Dirección"%><br />
+            <%= f.label "Dirección (*)"%><br />
             <%= f.text_field :address %>
           </div>
 
           <div class="field textos">
-            <%= f.label "Nº de dirección"%><br />
+            <%= f.label "Nº de dirección (*)"%><br />
             <%= f.text_field :n_address %>
           </div>
 
           <div class="field textos">
-            <%= f.label "Región" %><br />
+            <%= f.label "Región (*)" %><br />
             <%= f.select :province, options_from_collection_for_select(@regions, :name, :name), prompt: 'Región..', id: "f-category", class:'textos' %>
           </div>
 
           <div class="field textos">
-            <%= f.label "Comuna" %><br />
+            <%= f.label "Comuna (*)" %><br />
             <%= f.select :city, options_from_collection_for_select(@counties, :name, :name), prompt: 'Comuna..', id: "form-category",class:'textos' %>
           </div>
 
@@ -72,7 +72,8 @@
             <%= f.submit "Regístrate", class:'btn btn-form textos'%>
           </div>
         <% end %>
-
+        
+        <small><p>(*) campos obligatorios</p></small>
         <%= render "users/shared/links" %>
       </div>
     </div>
