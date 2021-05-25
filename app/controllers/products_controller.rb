@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :set_categories
   before_action :authenticate_user!
+  before_action :banned?, only: %i[ show edit update destroy new]
 
   # GET /products or /products.json
   def index
@@ -110,5 +111,4 @@ class ProductsController < ApplicationController
         end
       end
     end
-  
 end

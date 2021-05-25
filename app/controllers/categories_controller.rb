@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
   before_action :authenticate_admin!
+  before_action :banned?
 
   # GET /categories or /categories.json
   def index

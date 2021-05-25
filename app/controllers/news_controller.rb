@@ -1,6 +1,7 @@
 class NewsController < ApplicationController
   before_action :set_news, only: %i[ show edit update destroy ]
   before_action :authenticate_admin!
+  before_action :banned?
 
   # GET /news or /news.json
   def index

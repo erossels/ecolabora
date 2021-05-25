@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   permit_params do
-    permitted = [:email, :first_name, :last_name, :age, :address, :n_address, :city, :province]
+    permitted = [:email, :first_name, :last_name, :age, :address, :n_address, :city, :province, :banned]
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
@@ -39,6 +39,7 @@ ActiveAdmin.register User do
       f.input :n_address
       f.input :city
       f.input :province
+      f.input :banned
     end
     f.actions
   end

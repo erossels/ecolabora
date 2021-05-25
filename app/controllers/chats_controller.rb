@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :banned?
 
   # GET /chats or /chats.json
   def index

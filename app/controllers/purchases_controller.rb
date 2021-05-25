@@ -5,6 +5,7 @@ require 'json'
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[ show edit update destroy cancel_purchase end_purchase ]
   before_action :authenticate_user!
+  before_action :banned?
 
   # GET /Purchases or /Purchases.json
   def index
