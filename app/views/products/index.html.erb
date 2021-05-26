@@ -25,11 +25,22 @@
       </div>
     </section>
 
-
     <div class='jumbotron header container col-md-12 mx-auto py-0'>
       <div class="album py-2 bg-light">
         <div class="container">
-            <h5 class="header textos mr-auto small">Estos productos están cerca de tu comuna y región</h5>
+            <div class='row'>
+              <h5 class="header textos mr-auto small">Estos productos están cerca de tu comuna y región</h5>
+              <%= form_tag(products_path, method: :get) do %> 
+                <%= hidden_field_tag(params[:type],'Local') %>
+                <%= submit_tag "Local", class:'btn btn-warning my-2 textos' %>
+              <% end  %>
+
+              <%= form_tag(products_path, method: :get) do %> 
+                <%= hidden_field_tag(params[:type],'') %>
+                <%= submit_tag "Nacional", class:'btn btn-form my-2 textos' %>
+              <% end  %>
+            </div>
+
             <div class="row">
               <% @products.available.each do |p1,p2,p3|  %> 
                 <% if !p1.nil?  %>

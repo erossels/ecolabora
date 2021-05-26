@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 
   scope :available, -> {where('status = 0')}
   scope :sold, -> { where('status = 1') }
-  scope :local, -> { where("user_id = #{User.where(county: current_user.county, city:current_user.city)}")}
+  scope :local, -> (user) {joins(:user).where("users.province = ?", "%#{user.province}%")}
 
   validates :name, presence: {message: 'El producto debe tener un título'}
   validates :description, presence: {message: 'El producto debe tener una descripción'}

@@ -12,14 +12,17 @@ class ProductsController < ApplicationController
   def index
     @alert = Alert.new
     if params[:search].present?
-      if params[:type] == "Local"
+      if params[:commit] == "Local"
         @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
-        @products.local
+        @products.local(current_user)
       else
         @products = Product.with_attached_photos.all.where("name iLIKE (?) OR description iLIKE (?)", "%"+params[:search]+"%", "%"+params[:search]+"%").order(created_at: :desc)
       end
     else
       @products = Product.with_attached_photos.all.order(created_at: :desc)
+      if params[:commit] == "Local"
+        @products = @products.local(current_user)
+      end
     end
   end
 
@@ -85,7 +88,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:category_id, :user_id, :name, :description, :r_action, :status, :search, photos: [])
+      params.require(:product).permit(:category_id, :user_id, :name, :description, :r_action, :status, :search, :type, photos: [])
     end
 
     def set_categories
