@@ -33,6 +33,9 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.avatar = auth.info.image
       parse_name(user, auth.info.name)
+      user.address = "Completar"
+      user.province = "Completar"
+      user.city = 'Completar'
     end
   end
 
