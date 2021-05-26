@@ -60,7 +60,7 @@
 
           <div class="field textos">
             <%= f.label "Comuna (*)" %><br />
-            <%= f.select :city, options_from_collection_for_select(@counties, :name, :name), prompt: 'Comuna..', id: "form-category",class:'textos' %>
+            <%= f.select :city, options_from_collection_for_select(@counties.order(name: :asc), :name, :name), prompt: 'Comuna..', id: "form-category",class:'textos' %>
           </div>
 
           <div class="field textos">
