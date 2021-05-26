@@ -3,8 +3,8 @@ document.addEventListener("turbolinks:load", function() {
 
     $('.fa-bell').on('click', function(){
       $('#AlertModal').modal('show') 
-    })  
-    
+    }) 
+        
     $('.btn-close-modal').on('click',function(){
       $('.modal').modal('hide')
     })

@@ -8,21 +8,38 @@
       <div class='container col-md-10 mx-auto my-3'>
         <h2 class='titulos my-2'>Detalle noticia</h2>
 
-        
-        <p class='textos'>
-          <strong>Título: </strong>
-          <%= @news.title %>
-        </p>
+        <div class='row col-md-12 mb-3 align-items-center justify-content-center p-4 rounded shadow-sm bg-light'>
+          
+          <% if @news.photo.present? %>
+            <div class='container col-md-8'>
+              <%= image_tag(@news.photo, alt:"Foto_de_producto", width:"400", class:"rounded mb-2 img-thumbnail mx-auto d-block")%>
+            </div>
+          <% end  %>
+          
 
-        <p class='textos'>
-          <strong>Contenido:</strong>
-          <%= raw(@news.content) %>
-        </p>
+          <div class='container col-md-4'>
+            <p class='textos'>
+              <strong>Título: </strong>
+              <%= @news.title %>
+            </p>
 
-        <%= link_to 'Editar', edit_news_path(@news),  class:'textos' %> |
-        <%= link_to 'Volver', news_index_path,  class:'textos' %>
-  
+            <p class='textos'>
+              <strong>Contenido:</strong>
+              <%= raw(@news.content) %>
+            </p>
+          </div>
+        </div>
+      
+        <div class='container'>
+          <% if admin_signed_in?  %>
+            <%= link_to 'Editar', edit_news_path(@news),  class:'textos' %> |
+            <%= link_to 'Volver', news_index_path,  class:'textos' %>
+          <% else %>
+            <%= link_to 'Volver', root_path,  class:'textos' %>
+          <% end %>
+
         </div>
       </div> 
     </div>
   </div>
+</div>

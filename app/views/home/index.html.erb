@@ -63,9 +63,10 @@
           <div class='card-body'>  
             <h2 class='titulos textos-news'><%= n.title %></h2>
             <p class='textos-news textos'><%= raw(n.content) %></p>
-            <p><a class="btn btn-secondary textos btn-noticias" href="#" role="button">Ver más »</a></p>
+            <%= link_to 'Ver más >>', n, class:"btn btn-secondary btn-form textos btn-modal-noticias" %>
           </div>
         </div>
+
       <% end %>
     </div>
   </div>
