@@ -13,11 +13,11 @@ class User < ApplicationRecord
   ratyrate_rater
 
   validates :email, uniqueness: true
-  validates :first_name, presence: {message: 'Debes incluir tu nombre'}
-  validates :last_name, presence: {message: 'Debes incluir un apellido'}
-  validates :address, presence: {message: 'Debes incluir una dirección'}
-  validates :province, presence: {message: 'Debes seleccionar una región'}
-  validates :city, presence: {message: 'Debes seleccionar una comuna'}
+  validates :first_name, presence: {message: 'Debes incluir tu nombre'}, unless: -> { from_omniauth? }
+  validates :last_name, presence: {message: 'Debes incluir un apellido'}, unless: -> { from_omniauth? }
+  validates :address, presence: {message: 'Debes incluir una dirección'}, unless: -> { from_omniauth? }
+  validates :province, presence: {message: 'Debes seleccionar una región'}, unless: -> { from_omniauth? }
+  validates :city, presence: {message: 'Debes seleccionar una comuna'}, unless: -> { from_omniauth? }
 
   after_validation :report_validation_errors_to_rollbar
 
@@ -33,9 +33,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.avatar = auth.info.image
       parse_name(user, auth.info.name)
-      user.address = "Completar"
-      user.province = "Completar"
-      user.city = 'Completar'
     end
   end
 
@@ -44,6 +41,10 @@ class User < ApplicationRecord
     name_arr = name.split(" ")
     user.last_name = name_arr.pop
     user.first_name = name_arr.join(" ")
+  end
+
+  def from_omniauth?
+    provider && uid
   end
 
 end
